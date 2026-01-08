@@ -1,0 +1,4118 @@
+{
+  "metadata": {
+    "session_id": "4caea33d",
+    "firmware_name": "firmware2",
+    "firmware_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2",
+    "start_time": "2026-01-08T10:25:06.364548",
+    "end_time": "2026-01-08T10:25:09.579546",
+    "status": "completed",
+    "report_generated": "2026-01-08T10:25:09.580570"
+  },
+  "summary": {
+    "total_findings": 107,
+    "total_verifications": 107,
+    "severity_breakdown": {
+      "high": 32,
+      "medium": 75
+    },
+    "category_breakdown": {
+      "HARDCODED_CREDS": 5,
+      "HIDDEN_SERVICE": 25,
+      "SUSPICIOUS_BINARY": 4,
+      "ANTI_FORENSICS": 73
+    },
+    "verification_status_breakdown": {
+      "verified_suspicious": 107
+    }
+  },
+  "findings": [
+    {
+      "id": "334e426e",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出: basic_pppoe_passwd=\"パスワード\"",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/www.eng/mp_lang.js",
+        "line_number": 75,
+        "context": "basic_pppoe_passwd=\"パスワード\""
+      },
+      "pattern_matched": "passwd\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "basic_pppoe_passwd=\"パスワード\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:06.658808"
+    },
+    {
+      "id": "d6367ebd",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出: var hlp_hpasswd=\"<body bgcolor=#0099cc ><P><font size=4><B>Set Password Help</B></font></P><p> You u",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/www.eng/langs/ENU/hlp.js",
+        "line_number": 41,
+        "context": "var hlp_hpasswd=\"<body bgcolor=#0099cc ><P><font size=4><B>Set Password Help</B></font></P><p> You use the Set Password screen to change the password you use to access the Settings screens,<I>not</I> your ISP account password. <p> To change the password: <ol> <li>Type the old password.   <BR>The default password for the router is <b>password</b>.  <li>Type a new password, and type it again in the <b>Repeat New Password</b> field to confirm it.   <br>  <b>Note:</B> Be sure to write it down in a secure location.  <li>Click <b>Apply</b> to change the password, or click <b>Cancel</b> to keep the current password. </ol><p> <b>Note:</b> If you have backed up the router settings previously, you should do a new backup so that the settings file includes the new password. </p><p><b>Enable Password Recovery</b><br>NETGEAR recommends that you enable password recovery if you change the password for the router’s user name of admin. Then you will have an easy way to recover the password if it is forgotten. <p><b>To enable password recovery:</b><ol><li>Select the <b>Enable Password Recovery</b> check box.<li>Select two security questions and provide answers to them.<li>Click <b>Apply</b> to save your changes.</ol></p>When you use your browser to access the router, the log in window displays. If password recovery is enabled, when you click <b>Cancel</b>, the password recovery process starts. You can then enter the saved answers to the security questions to recover the password. This recovery process is supported in Internet Explorer, Firefox, and Chrome browsers, but not in the Safari browser.</p></body>\";"
+      },
+      "pattern_matched": "passwd\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "var hlp_hpasswd=\"<body bgcolor=#0099cc ><P><font size=4><B>Set Password Help</B></font></P><p> You use the Set Password screen to change the password you use to access the Settings screens,<I>not</I> your ISP account password. <p> To change the password: <ol> <li>Type the old password.   <BR>The default password for the router is <b>password</b>.  <li>Type a new password, and type it again in the <b>Repeat New Password</b> field to confirm it.   <br>  <b>Note:</B> Be sure to write it down in a secure location.  <li>Click <b>Apply</b> to change the password, or click <b>Cancel</b> to keep the current password. </ol><p> <b>Note:</b> If you have backed up the router settings previously, you should do a new backup so that the settings file includes the new password. </p><p><b>Enable Password Recovery</b><br>NETGEAR recommends that you enable password recovery if you change the password for the router’s user name of admin. Then you will have an easy way to recover the password if it is forg",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:06.658836"
+    },
+    {
+      "id": "7d26288a",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出: root::0:0:root:/:/bin/sh",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/passwd",
+        "line_number": 1,
+        "context": "root::0:0:root:/:/bin/sh"
+      },
+      "pattern_matched": "root:[^:]*:[0-9]+:",
+      "raw_content": "root::0:0:root:/:/bin/sh",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:07.091833"
+    },
+    {
+      "id": "8d5060d6",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 68,
+        "context": "\tftpdownload=`nvram_get 2860 FtpDownload`"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\tftpdownload=`nvram_get 2860 FtpDownload`",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098524"
+    },
+    {
+      "id": "252b5467",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 73,
+        "context": "\techo \"proftpd.sh server \"$ftpname\" $ip $ftpport $ftpmax\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\techo \"proftpd.sh server \"$ftpname\" $ip $ftpport $ftpmax\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098538"
+    },
+    {
+      "id": "5ae87980",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 74,
+        "context": "\tproftpd.sh server \"$ftpname\" $ip $ftpport $ftpmax"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\tproftpd.sh server \"$ftpname\" $ip $ftpport $ftpmax",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098540"
+    },
+    {
+      "id": "bd424bee",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 76,
+        "context": "\t\techo \"proftpd.sh user $ftpadddir $ftprename $ftpremove $ftpread $ftpwrite $ftpdownload $ftpupload\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\t\techo \"proftpd.sh user $ftpadddir $ftprename $ftpremove $ftpread $ftpwrite $ftpdownload $ftpupload\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098543"
+    },
+    {
+      "id": "af3a14a9",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 77,
+        "context": "\t\tproftpd.sh user $ftpadddir $ftprename $ftpremove $ftpread $ftpwrite $ftpdownload $ftpupload"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\t\tproftpd.sh user $ftpadddir $ftprename $ftpremove $ftpread $ftpwrite $ftpdownload $ftpupload",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098545"
+    },
+    {
+      "id": "11f5071c",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 80,
+        "context": "\t\techo \"proftpd.sh anonymous 10\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\t\techo \"proftpd.sh anonymous 10\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098547"
+    },
+    {
+      "id": "b56aa9b4",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 81,
+        "context": "\t\tproftpd.sh anonymous 10"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\t\tproftpd.sh anonymous 10",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098549"
+    },
+    {
+      "id": "637d2442",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 176,
+        "context": "\t\tkillall -q proftpd"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\t\tkillall -q proftpd",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098551"
+    },
+    {
+      "id": "800db736",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 185,
+        "context": "\t\t\techo \"proftpd\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\t\t\techo \"proftpd\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098553"
+    },
+    {
+      "id": "db811e57",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 186,
+        "context": "\t\t\tproftpd"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "\t\t\tproftpd",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098555"
+    },
+    {
+      "id": "a74b9088",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 20,
+        "context": "iwevent stupid-ftpd smbd ated ntpclient lld2d igmpproxy dnsmasq telnetd miniupnpd\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "iwevent stupid-ftpd smbd ated ntpclient lld2d igmpproxy dnsmasq telnetd miniupnpd\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098558"
+    },
+    {
+      "id": "310e05d4",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 1,
+        "context": "#Configuration file for bftpd."
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "#Configuration file for bftpd.",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098560"
+    },
+    {
+      "id": "c9c32372",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 15,
+        "context": "  #You can force bftpd to use a specific port range in passive mode."
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  #You can force bftpd to use a specific port range in passive mode.",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098562"
+    },
+    {
+      "id": "bfd23afd",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 20,
+        "context": "  #bftpd will try to bind one of these ports in ascending order as"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  #bftpd will try to bind one of these ports in ascending order as",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098564"
+    },
+    {
+      "id": "b8f0f44e",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 49,
+        "context": "  #The bftpdutmp file enables you to record user logins and logouts in"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  #The bftpdutmp file enables you to record user logins and logouts in",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098566"
+    },
+    {
+      "id": "b283bfa2",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 50,
+        "context": "  #bftpd, which is useful for the administration interface (which is not"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  #bftpd, which is useful for the administration interface (which is not",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098568"
+    },
+    {
+      "id": "ace294e9",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 56,
+        "context": "  PATH_BFTPDUTMP=\"/var/run/bftpd/bftpdutmp\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  PATH_BFTPDUTMP=\"/var/run/bftpd/bftpdutmp\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098570"
+    },
+    {
+      "id": "6a7b0211",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 129,
+        "context": "  #LOGFILE=\"/var/log/bftpd.log\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  #LOGFILE=\"/var/log/bftpd.log\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098572"
+    },
+    {
+      "id": "8cc722e8",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 136,
+        "context": "  HELLO_STRING=\"bftpd %v at %i ready.\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  HELLO_STRING=\"bftpd %v at %i ready.\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098574"
+    },
+    {
+      "id": "e87efd3c",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 146,
+        "context": "  # bftpd will search through the pathname given in order"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  # bftpd will search through the pathname given in order",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098576"
+    },
+    {
+      "id": "a3e39697",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 158,
+        "context": "  FILE_AUTH=\"/etc/ftpdpassword\""
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  FILE_AUTH=\"/etc/ftpdpassword\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098579"
+    },
+    {
+      "id": "ac587817",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 187,
+        "context": "  #If you want bftpd to bind itself to one specific network interface, enter"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  #If you want bftpd to bind itself to one specific network interface, enter",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098581"
+    },
+    {
+      "id": "05a9efa0",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 193,
+        "context": "  # This option allows you to over-ride the IP address Bftpd"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  # This option allows you to over-ride the IP address Bftpd",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098583"
+    },
+    {
+      "id": "7d216d4e",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 249,
+        "context": "  # To use this option, bftpd must be configured using"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  # To use this option, bftpd must be configured using",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098585"
+    },
+    {
+      "id": "94185aff",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/bftpd.conf",
+        "line_number": 258,
+        "context": "  #To use this option, bftpd must be configured using"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "  #To use this option, bftpd must be configured using",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:08.098587"
+    },
+    {
+      "id": "dcf23f9f",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: enable_ftp.sh",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/bin/enable_ftp.sh",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/bin/enable_ftp.sh",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "enable_ftp.sh",
+        "matched_pattern": "enable_ftp",
+        "size": 519
+      },
+      "timestamp": "2026-01-08T10:25:08.264830"
+    },
+    {
+      "id": "a8a82c9c",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: enable_ftp.sh",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/sbin/enable_ftp.sh",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/sbin/enable_ftp.sh",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "enable_ftp.sh",
+        "matched_pattern": "enable_ftp",
+        "size": 519
+      },
+      "timestamp": "2026-01-08T10:25:08.265384"
+    },
+    {
+      "id": "a1e69f48",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: enable_ftp.sh",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/bin/enable_ftp.sh",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/bin/enable_ftp.sh",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "enable_ftp.sh",
+        "matched_pattern": "enable_ftp",
+        "size": 519
+      },
+      "timestamp": "2026-01-08T10:25:08.265938"
+    },
+    {
+      "id": "e20aaff9",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: enable_ftp.sh",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/enable_ftp.sh",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/enable_ftp.sh",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "enable_ftp.sh",
+        "matched_pattern": "enable_ftp",
+        "size": 519
+      },
+      "timestamp": "2026-01-08T10:25:08.266441"
+    },
+    {
+      "id": "30868dc9",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 132,
+        "context": "\t\tfdisk /dev/sda < /etc/delpart 1>/dev/null 2>&1 "
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tfdisk /dev/sda < /etc/delpart 1>/dev/null 2>&1 ",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084062"
+    },
+    {
+      "id": "f35d3e76",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 140,
+        "context": "\t\tfdisk /dev/sda < /etc/extpart 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tfdisk /dev/sda < /etc/extpart 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084078"
+    },
+    {
+      "id": "ab139594",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 161,
+        "context": "\t\tfdisk /dev/sda < /etc/parted 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tfdisk /dev/sda < /etc/parted 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084081"
+    },
+    {
+      "id": "ee3b66cc",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 166,
+        "context": "\t\tumount -l $2 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tumount -l $2 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084084"
+    },
+    {
+      "id": "656d0ff8",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/storage.sh",
+        "line_number": 168,
+        "context": "\t\tmkdosfs -F 32 $2 $3 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tmkdosfs -F 32 $2 $3 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084086"
+    },
+    {
+      "id": "8d7661d2",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 23,
+        "context": "\tiptables -F -t filter 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -F -t filter 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084089"
+    },
+    {
+      "id": "bb59df03",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 25,
+        "context": "\tiptables -D FORWARD -j $IPPORT_FILTER_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -D FORWARD -j $IPPORT_FILTER_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084091"
+    },
+    {
+      "id": "d203e7b5",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 26,
+        "context": "\tiptables -F $IPPORT_FILTER_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -F $IPPORT_FILTER_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084093"
+    },
+    {
+      "id": "719bc384",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 28,
+        "context": "\tiptables -D FORWARD -j $MAC_FILTER_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -D FORWARD -j $MAC_FILTER_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084096"
+    },
+    {
+      "id": "92907899",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 29,
+        "context": "\tiptables -F $MAC_FILTER_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -F $MAC_FILTER_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084098"
+    },
+    {
+      "id": "b0bafbc8",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 40,
+        "context": "\tiptables -t filter -N $IPPORT_FILTER_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t filter -N $IPPORT_FILTER_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084104"
+    },
+    {
+      "id": "8ef6ad68",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 41,
+        "context": "\tiptables -t filter -N $MAC_FILTER_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t filter -N $MAC_FILTER_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084106"
+    },
+    {
+      "id": "cbabd44d",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 42,
+        "context": "\tiptables -t filter -A FORWARD -j $MAC_FILTER_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t filter -A FORWARD -j $MAC_FILTER_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084109"
+    },
+    {
+      "id": "35a982db",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 43,
+        "context": "\tiptables -t filter -A FORWARD -j $IPPORT_FILTER_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t filter -A FORWARD -j $IPPORT_FILTER_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084112"
+    },
+    {
+      "id": "e70a3423",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 50,
+        "context": "\tiptables -t nat -D PREROUTING -j $PORT_FORWARD_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t nat -D PREROUTING -j $PORT_FORWARD_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084115"
+    },
+    {
+      "id": "bd7842f2",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 51,
+        "context": "\tiptables -t nat -F $PORT_FORWARD_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t nat -F $PORT_FORWARD_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084117"
+    },
+    {
+      "id": "4dabd424",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 52,
+        "context": "\tiptables -t nat -X $PORT_FORWARD_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t nat -X $PORT_FORWARD_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084120"
+    },
+    {
+      "id": "cca2bbe0",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 54,
+        "context": "\tiptables -t nat -N $PORT_FORWARD_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t nat -N $PORT_FORWARD_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084123"
+    },
+    {
+      "id": "ee10b88a",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 55,
+        "context": "\tiptables -t nat -I PREROUTING 1 -j $PORT_FORWARD_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t nat -I PREROUTING 1 -j $PORT_FORWARD_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084125"
+    },
+    {
+      "id": "b9462864",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 56,
+        "context": "\tiptables -t nat -N $DMZ_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t nat -N $DMZ_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084127"
+    },
+    {
+      "id": "b1114df3",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/firewall.sh",
+        "line_number": 57,
+        "context": "\tiptables -t nat -I PREROUTING 2 -j $DMZ_CHAIN 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tiptables -t nat -I PREROUTING 2 -j $DMZ_CHAIN 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084130"
+    },
+    {
+      "id": "98575552",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 29,
+        "context": "\tifconfig wds0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wds0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084132"
+    },
+    {
+      "id": "2d350aae",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 30,
+        "context": "\tifconfig wds1 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wds1 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084134"
+    },
+    {
+      "id": "92b4506a",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 31,
+        "context": "\tifconfig wds2 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wds2 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084136"
+    },
+    {
+      "id": "780bb5c9",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 32,
+        "context": "\tifconfig wds3 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wds3 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084139"
+    },
+    {
+      "id": "17b5a6ad",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 34,
+        "context": "\tifconfig apcli0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig apcli0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084142"
+    },
+    {
+      "id": "ce80b2f0",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 36,
+        "context": "\tifconfig mesh0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig mesh0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084144"
+    },
+    {
+      "id": "66eb6940",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 48,
+        "context": "\tifconfig wdsi0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wdsi0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084147"
+    },
+    {
+      "id": "1d066b72",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 49,
+        "context": "\tifconfig wdsi1 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wdsi1 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084149"
+    },
+    {
+      "id": "1a277dec",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 50,
+        "context": "\tifconfig wdsi2 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wdsi2 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084151"
+    },
+    {
+      "id": "de5c1b78",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/wifi_unload.sh",
+        "line_number": 51,
+        "context": "\tifconfig wdsi3 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wdsi3 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084154"
+    },
+    {
+      "id": "81ec31f7",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 130,
+        "context": "\t\tifconfig ra$num down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig ra$num down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084156"
+    },
+    {
+      "id": "1a7d2799",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 133,
+        "context": "\tifconfig wds0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wds0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084158"
+    },
+    {
+      "id": "ac23a92e",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 134,
+        "context": "\tifconfig wds1 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wds1 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084160"
+    },
+    {
+      "id": "d916f3bd",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 135,
+        "context": "\tifconfig wds2 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wds2 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084163"
+    },
+    {
+      "id": "b708d241",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 136,
+        "context": "\tifconfig wds3 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wds3 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084165"
+    },
+    {
+      "id": "221ff64b",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 138,
+        "context": "\tifconfig apcli0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig apcli0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084167"
+    },
+    {
+      "id": "b86c808c",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 140,
+        "context": "\tifconfig mesh0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig mesh0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084169"
+    },
+    {
+      "id": "073ac06c",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 150,
+        "context": "\t\tifconfig rai$num down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig rai$num down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084172"
+    },
+    {
+      "id": "efde852d",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 153,
+        "context": "\tifconfig wdsi0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wdsi0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084174"
+    },
+    {
+      "id": "e8f30764",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 154,
+        "context": "\tifconfig wdsi1 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wdsi1 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084176"
+    },
+    {
+      "id": "ebbfd686",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 155,
+        "context": "\tifconfig wdsi2 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wdsi2 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084179"
+    },
+    {
+      "id": "1cf8d8d3",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 156,
+        "context": "\tifconfig wdsi3 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig wdsi3 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084181"
+    },
+    {
+      "id": "bbdfabac",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 185,
+        "context": "                ifconfig ra$num 0.0.0.0 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "                ifconfig ra$num 0.0.0.0 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084183"
+    },
+    {
+      "id": "133638ae",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 195,
+        "context": "\t\tifconfig wds0 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig wds0 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084185"
+    },
+    {
+      "id": "c403fb60",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 196,
+        "context": "\t\tifconfig wds1 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig wds1 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084188"
+    },
+    {
+      "id": "a5e0a3f7",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 197,
+        "context": "\t\tifconfig wds2 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig wds2 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084190"
+    },
+    {
+      "id": "860ce15a",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 198,
+        "context": "\t\tifconfig wds3 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig wds3 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084192"
+    },
+    {
+      "id": "a0adc8e1",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 210,
+        "context": "\t\tifconfig mesh0 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig mesh0 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084194"
+    },
+    {
+      "id": "8962edc1",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 226,
+        "context": "\t\tifconfig rai$num up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig rai$num up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084197"
+    },
+    {
+      "id": "ba38c111",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 240,
+        "context": "\t\tifconfig wdsi0 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig wdsi0 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084199"
+    },
+    {
+      "id": "7a5db142",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 241,
+        "context": "\t\tifconfig wdsi1 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig wdsi1 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084201"
+    },
+    {
+      "id": "4b7b43b8",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 242,
+        "context": "\t\tifconfig wdsi2 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig wdsi2 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084207"
+    },
+    {
+      "id": "b224b68c",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 243,
+        "context": "\t\tifconfig wdsi3 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\tifconfig wdsi3 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084209"
+    },
+    {
+      "id": "9803fd37",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 442,
+        "context": "killall -9 watchdog 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "killall -9 watchdog 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084212"
+    },
+    {
+      "id": "4de493bd",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 595,
+        "context": "ifconfig ra0 0.0.0.0 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "ifconfig ra0 0.0.0.0 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084215"
+    },
+    {
+      "id": "6babd8f0",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 604,
+        "context": "\tifconfig rai0 0.0.0.0 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\tifconfig rai0 0.0.0.0 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084218"
+    },
+    {
+      "id": "277df7b1",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 704,
+        "context": "\t\t\tifconfig rai0 down 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\t\tifconfig rai0 down 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084220"
+    },
+    {
+      "id": "f1ae1366",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/internet.sh",
+        "line_number": 706,
+        "context": "\t\t\tifconfig rai0 up 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\t\tifconfig rai0 up 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084223"
+    },
+    {
+      "id": "06804e1d",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/miniupnpd.sh",
+        "line_number": 26,
+        "context": "killall -q miniupnpd 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "killall -q miniupnpd 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084225"
+    },
+    {
+      "id": "825217be",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/miniupnpd.sh",
+        "line_number": 27,
+        "context": "rm /etc/$MINIUPNPD_FILE 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "rm /etc/$MINIUPNPD_FILE 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084228"
+    },
+    {
+      "id": "671f5338",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/miniupnpd.sh",
+        "line_number": 29,
+        "context": "$IPTABLES -t nat -F MINIUPNPD 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "$IPTABLES -t nat -F MINIUPNPD 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084230"
+    },
+    {
+      "id": "daf045cc",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/miniupnpd.sh",
+        "line_number": 31,
+        "context": "$IPTABLES -t nat -D PREROUTING -i $WAN_IF -j MINIUPNPD 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "$IPTABLES -t nat -D PREROUTING -i $WAN_IF -j MINIUPNPD 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084232"
+    },
+    {
+      "id": "c5789b98",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/miniupnpd.sh",
+        "line_number": 32,
+        "context": "$IPTABLES -t nat -X MINIUPNPD 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "$IPTABLES -t nat -X MINIUPNPD 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084235"
+    },
+    {
+      "id": "4cca7125",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/miniupnpd.sh",
+        "line_number": 35,
+        "context": "$IPTABLES -t filter -F MINIUPNPD 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "$IPTABLES -t filter -F MINIUPNPD 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084237"
+    },
+    {
+      "id": "eaf388b7",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/miniupnpd.sh",
+        "line_number": 37,
+        "context": "$IPTABLES -t filter -D FORWARD -i $WAN_IF ! -o $WAN_IF -j MINIUPNPD 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "$IPTABLES -t filter -D FORWARD -i $WAN_IF ! -o $WAN_IF -j MINIUPNPD 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084239"
+    },
+    {
+      "id": "9b97b990",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/miniupnpd.sh",
+        "line_number": 38,
+        "context": "$IPTABLES -t filter -X MINIUPNPD 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "$IPTABLES -t filter -X MINIUPNPD 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084242"
+    },
+    {
+      "id": "22c8a3e5",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/vpn-passthru.sh",
+        "line_number": 13,
+        "context": "\trmmod nf_nat_pptp 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\trmmod nf_nat_pptp 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084244"
+    },
+    {
+      "id": "eea61608",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/vpn-passthru.sh",
+        "line_number": 14,
+        "context": "\trmmod nf_conntrack_pptp 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\trmmod nf_conntrack_pptp 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084246"
+    },
+    {
+      "id": "015a7ecc",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/vpn-passthru.sh",
+        "line_number": 15,
+        "context": "\trmmod nf_nat_proto_gre 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\trmmod nf_nat_proto_gre 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084248"
+    },
+    {
+      "id": "cee08861",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/vpn-passthru.sh",
+        "line_number": 16,
+        "context": "\trmmod nf_conntrack_proto_gre 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\trmmod nf_conntrack_proto_gre 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084251"
+    },
+    {
+      "id": "9e797ef9",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/vpn-passthru.sh",
+        "line_number": 18,
+        "context": "\trmmod ip_nat_pptp 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\trmmod ip_nat_pptp 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084253"
+    },
+    {
+      "id": "d107be84",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/vpn-passthru.sh",
+        "line_number": 19,
+        "context": "\trmmod ip_conntrack_pptp 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\trmmod ip_conntrack_pptp 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:09.084255"
+    },
+    {
+      "id": "99281c9f",
+      "category": "HARDCODED_CREDS",
+      "title": "ログイン可能なアカウントを検出",
+      "description": "17個のシェルアクセス可能なアカウントを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/sbin/passwd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "accounts": [
+          {
+            "username": "\u0000\u0007\u0000\u0010\u0010\u0000\u0000\u0001\u0000B$\b\u0000\u0003\u0000\u0000\b\u0000\u001c<x+'!\u0003'\\\u0000X\u0000T\u0000P\u0000L\u0000H\u0000D\u0000@\u0000<\u00008\u0000\u0010\u0000Ăd\u0000\u0000\u0000R\u0000\u0000\u0000\u0000\u001c\u0000B\u0000\u0000\u0000\u0000\u0000@\u0010!\u0000 \u0000B\u0000\u0000\u0000\u0000\u0000@\u0010\u0004\u0000(\u0000@\u0010\u0000\u0000\u0000\u0000\u0006\u0000,\u0002\u0000\u0007\u0000\u0010\u0007\u0000\u0000\u0003B0\u0003\u0000P0%\u0018\u0006\u0000%(\u0000\u0000\u0003c0!\u0000\u00020\u0000%\u0003\u0001?\u00000\t \u0003?\u00000\u0010\u0000! @\u0000,\u0018\u0000'V$\u001c\u0000'!\u0002\u0001\u00005\u0005\u00003\t \u0003 \u0000'!\u0000\u0002\t \u0003!  \u0002\u0010\u0000!  \u0002,\u0000\u0000\u0000\u00009'\t \u0003!@\u0000!\u0002\u0002\u0004&$\u0000'(\u0000'!\u0002\t \u0003,\u0000'$\u0000B\u0010\u0000\u0001\u0004B,%\u0000@\u0010\u0000\u0000\u0000\u0000\u0018\u0000\u0000\u0000\u0000\u0000\t\u0000\u0016\u0000\u0000\u0000\u0000\u001c\u0000\u0000\u0000\u0000\u0000\u0005\u0000\u0016\u0000\u0000\u0000\u0000 \u0000\u0000\u0000\u0000\u0000\u0019\u0000\u0013\u0000\u0000\u0000\u0000\u001cd\u0000(\u0014",
+            "uid": "$!0\u0002\t \u0003!8\u0003\u0010\u0000\u0018\u0000\u001c(\u001c\u0000 \u0000\t \u0003t",
+            "gid": "$\u0010\u0000\u0000\u0000\u0000\u0000Ă\u0000\u0000\u0000\u0000\u0000\u0000b\u0000\u0000\u0000\u0000$\u0000B\u0000\u0000\u0000\u0000\u0001\u0004B,&\u0000@\u0010\u0000\u0000\u0000\u0000$\u00000\u0000\u0000\u0000\u0000\u0000\t\u0000\"\u0017\u0000\u0000\u0000\u0000(\u0000\u0000\u0000\u0000\u0000\u0005\u0000b\u0016\u0000\u0000\u0000\u0000,\u0000\u0000\u0000\u0000\u0000\u0019\u0000\u0012\u0000\u0000\u0000\u0000\u001cd\u0000(",
+            "home": "$!0`\u0002\t \u0003!8\u0002\u0010\u0000$\u0000\u001c((\u0000,\u0000\t \u0003t",
+            "shell": "$\u0010\u0000\u0000\u0000\u0000\u0000Ă\u0000\u0000\u0000\u0000\u0000\u0000#\u0000\u0000\u0000\u0000\u001c\u0000b\u0000\u0000\u0000\u0000B$\u0005\u0000b\u0016\u0000\u0000\u0000\u0000 \u0000b\u0000\u0000\u0000\u0000\b\u0000\u0012\u0000\u0000\u0000\u0000\u001cd\u0000(",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000\u0000\u0001\u0000\u0000\u0000PATH=/sbin",
+            "uid": "/bin",
+            "gid": "/usr/bin\u0000-/bin/sh\u0000\u0000/dev/null\u0000/etc/motd\u0000/etc/passwd\u00000123456789ABCDEF\u0000default\u0000standard output\u0000standard input\u0000invalid argument '%s' to '%s'\u0000%s requires an argument\u0000permission denied. (are you root?)\u0000can't create raw socket\u0000read error\u0000write error\u0000invalid date '%s'\u0000memory exhausted\u0000BusyBox v1.12.1 (2019-06-25 16",
+            "home": "43 CST)\u0000\u0000\u0000 123456789\u0000\u00000123456789\u0000\u0000LINES\u0000\u0000\u0000COLUMNS\u0000can't open '%s'\u0000can't remove file '%s'\u0000\u0000can't move '%s' to '%s'\u0000can't create pipe\u0000\u0000\u0000can't duplicate file descriptor\u0000short write\u0000lseek(%llu)\u0000lseek\u0000\u0000\u0000%s",
+            "shell": " I/O error\u0000\u0000\u0000setgid\u0000\u0000setuid\u0000\u0000chdir(%s)\u0000\u0000\u0000can't change root directory to %s\u0000\u0000\u0000bind\u0000\u0000\u0000\u0000listen\u0000\u0000sendto\u0000\u0000can't stat '%s'\u0000SELinux support is disabled\u0000short read\u0000\u0000can't read '%s'\u0000read error from '%s'\u0000\u0000\u0000\u0000poll\u0000\u0000\u0000\u0000m--e",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000 %8s\u0000\u0000\u0000\u0000  %s\u0000\u0000\u0000\u0000\t \u0000\u0000wfa\u0000rmmod\u0000\u0000\u0000ether\u0000\u0000\u0000inet\u0000\u0000\u0000\u0000%s",
+            "uid": "p",
+            "gid": "H",
+            "home": "i",
+            "shell": "adnDsv\u0000\u0000\u0000\u0000%s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000r+\u0000\u0000USER\u0000\u0000\u0000\u0000PASS\u0000\u0000\u0000\u0000TYPE I\u0000\u0000PASV\u0000\u0000\u0000\u0000SIZE\u0000\u0000\u0000\u0000stat\u0000\u0000\u0000\u0000REST %lld\u0000\u0000\u0000RETR\u0000\u0000\u0000\u0000QUIT\u0000\u0000\u0000\u0000# \t\u0000sethostname\u0000dfisF",
+            "uid": " '%s'\u0000\u0000\u0000invalid hw-addr %s\u0000\u0000SIOC%s\u0000\u0000SIOCGIFFLAGS\u0000\u0000\u0000\u0000SIOCSIFFLAGS\u0000\u0000\u0000\u0000%n%llu%u%u%u%u%n%n%n%llu%u%u%u%u%u\u0000\u0000%llu%llu%u%u%u%u%n%n%llu%llu%u%u%u%u%u\u0000\u0000%llu%llu%u%u%u%u%u%u%llu%llu%u%u%u%u%u%u\u0000\u0000\u0000\u0000unknown\u000010base2\u000010baseT\u0000AUI\u0000100baseT\u0000\u0000\u0000\u0000100baseTX\u0000\u0000\u0000100baseFX\u0000\u0000\u0000unspec\u0000\u0000UNSPEC\u0000\u0000DARPA Internet\u0000\u0000ppp\u0000Point-to-Point Protocol\u0000Ethernet\u0000\u0000\u0000\u0000loop\u0000\u0000\u0000\u0000Local Loopback\u0000\u0000[NONE SET]\u0000\u0000%02X-\u0000\u0000\u0000error",
+            "gid": " no inet socket available\u0000SIOCGIFCONF\u0000/proc/net/dev\u0000\u0000\u0000compressed\u0000\u0000bytes\u0000\u0000\u0000Device not found\u0000\u0000\u0000\u0000%s",
+            "home": " %s\u0000\u0000\u0000\u0000%02X",
+            "shell": "%02X",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000          \u0000\u0000[NO FLAGS] \u0000 MTU",
+            "uid": "%d\u0000\u0000RX packets",
+            "gid": "%llu errors",
+            "home": "%lu overruns",
+            "shell": "%lu frame",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000=1",
+            "uid": "v--q",
+            "gid": "Q+",
+            "home": "W+\u0000\u0000\u0000qvc",
+            "shell": "Q",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000-net\u0000\u0000\u0000\u0000-host\u0000\u0000\u0000A",
+            "uid": "l",
+            "gid": "Kip",
+            "home": "F\u0000\u0001\u001f!\u0001\u0003\u0000file not found\u0000access violation\u0000disk full\u0000bad operation\u0000unknown transfer id\u0000file already exists\u0000no such user\u0000bad option\u0000server error",
+            "shell": " (%u) %s\u0000\u0000\u0000g",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000public\u0000\u0000private\u0000x-x\u0000FIlnrdvxt",
+            "uid": "m",
+            "gid": "p",
+            "home": "s",
+            "shell": "w",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000error getting response\u0000\u0000http",
+            "uid": "//\u0000\u0000not an http or ftp url",
+            "gid": " %s\u0000\u0000bad header line",
+            "home": "P",
+            "shell": "Y",
+            "has_shell": false
+          },
+          {
+            "username": "%5u%6u %-8.8s %s%s%4u%%%4u%% \u0000\u0000d",
+            "uid": "b\u0000\u0000\u0000/proc\u0000\u0000\u0000no process info in /proc\u0000\u0000\u0000\u0000PS1=$ \u0000\u0000PS2=> \u0000\u0000PS4=+ \u0000\u0000eerrexit\u0000\u0000\u0000\u0000fnoglob\u0000Iignoreeof\u0000\u0000iinteractive\u0000\u0000\u0000\u0000mmonitor\u0000\u0000\u0000\u0000nnoexec\u0000sstdin\u0000\u0000xxtrace\u0000vverbose\u0000\u0000\u0000\u0000Cnoclobber\u0000\u0000aallexport\u0000\u0000bnotify\u0000unounset\u0000\u0000\u0000\u0000\u0001end of file\u0000\u0000\u0000\u0000\u0001)\u0000\u0000\u0001;;\u0000\u0001`\u0000\u0000\u0001do\u0000\u0001done\u0000\u0000\u0000\u0001elif\u0000\u0000\u0000\u0001else\u0000\u0000\u0000\u0001esac\u0000\u0000\u0000\u0001fi\u0000\u0001then\u0000\u0000\u0000\u0001}\u0000\u00003.\u0000\u00003",
+            "gid": "\u0000\u00002[\u0000\u00002[[\u00006alias\u0000\u00002bg\u00003break\u0000\u00002cd\u00000chdir\u0000\u00003continue\u0000\u0000\u00003eval\u0000\u0000\u00003exec\u0000\u0000\u00003exit\u0000\u0000\u00007export\u00002false\u0000\u00002fg\u00000hash\u0000\u0000\u00002jobs\u0000\u0000\u00002kill\u0000\u0000\u00000let\u0000\u0000\u0000\u00004local\u0000\u00000pwd\u0000\u0000\u0000\u00002read\u0000\u0000\u00007readonly\u0000\u0000\u00003return\u00003set\u0000\u0000\u0000\u00003shift\u0000\u00003source\u00002test\u0000\u0000\u00003times\u0000\u00003trap\u0000\u0000\u00002true\u0000\u0000\u00000type\u0000\u0000\u00000ulimit\u00002umask\u0000\u00002unalias\u0000\u0000\u0000\u00003unset\u0000\u00002wait\u0000\u0000\u0000%s",
+            "home": " \u0000\u0000\u0000illegal option -%c\u0000\u0000no arg for -%c option\u0000\u0000\u0000%.*s",
+            "shell": " is read only\u0000\u0000%.*s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000b+",
+            "uid": "H+",
+            "gid": "S+\u0000b",
+            "home": "H",
+            "shell": "lS",
+            "has_shell": false
+          },
+          {
+            "username": "\"\u0000bcdoxCe",
+            "uid": "n",
+            "gid": "s",
+            "home": "%u\u0000\u0000\u0000mknod %s\u0000\u0000\u0000\u0000root\u0000\u0000\u0000\u0000MDEV=%s\u0000can't run '%s'\u0000\u0000-s\u0000\u0000/sys/block\u0000\u0000/sys/class\u0000\u0000ACTION\u0000\u0000DEVPATH\u0000SEQNUM\u0000\u0000mdev.seq\u0000\u0000\u0000\u0000/sys%s\u0000\u0000remove\u0000\u0000add\u0000(Enter",
+            "shell": "next line Space",
+            "has_shell": false
+          },
+          {
+            "username": ",\u0000\u0000\u0000warning",
+            "uid": " %s=%d\u0000\u0000no\u0000\u0000warning",
+            "gid": " option nolock is not supported\u0000unknown nfs mount option",
+            "home": "%s failed, reason given by server",
+            "shell": " %s\u0000\u0000\u0000\u0000NFS over TCP is not supported\u0000\u0000\u0000nfs socket\u0000\u0000nfs bindresvport\u0000\u0000\u0000\u0000nodev\u0000\u0000\u0000mounting %s on %s failed\u0000\u0000\u0000\u0000mount('%s','%s','%s',0x%08lx,'%s')",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u000f\u0000\u0011\u0000\u0013\u0000\u0017\u0000\u001b\u0000\u001f\u0000#\u0000+\u00003\u0000;\u0000C\u0000S\u0000c\u0000s\u0000\u0000\u0000\u0000\u0000\u0002\u0001\u0000\u0000\u0000\u0000unexpected end of file\u0000\u0000corrupted data\u0000\u0000write\u0000\u0000\u0000read error\u0000\u0000incorrect length\u0000\u0000\u0000\u0000invalid mode",
+            "uid": "l--s",
+            "gid": "s--l",
+            "home": "rRd",
+            "shell": "Rd",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000no address after comma\u0000\u0000missing command\u0000bad option in substitution expression\u0000\u0000\u0000aic\u0000only a beginning address can be specified for edit commands\u0000command only uses one address\u0000\u0000\u0000",
+            "uid": "",
+            "gid": "f",
+            "home": "nn\u0000\u0000\u0000\u0000irne",
+            "shell": "f",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000^0bBh\b\u0000OA\u0000\u0000OB\u0000\u0000OC\u0000\u0000OD\u0000\u0000OH\u0000\u0000OF\u0000\u0000[A\u0000\u0000[B\u0000\u0000[C\u0000\u0000[D\u0000\u0000[H\u0000\u0000[F\u0000\u0000[1~\u0000[2~\u0000[3~\u0000[4~\u0000[5~\u0000[6~\u0000OP\u0000\u0000OQ\u0000\u0000OR\u0000\u0000OS\u0000\u0000[11~[12~[13~[14~[15~[17~[18~[19~[20~[21~[23~[24~\u0000\u0000-IR-\u0000\u0000\u0000\u0000-exec CMD must end by ';'\u0000\u0000\u0000unpaired '('\u0000\u0000\u0000\u0000-type\u0000\u0000\u0000unrecognized",
+            "uid": "\u0000H-h",
+            "gid": "c-n",
+            "home": "l-n",
+            "shell": "e",
+            "has_shell": false
+          },
+          {
+            "username": "\t\u000b\\\\\u0000\u0000/proc/%d\u0000\u0000\u0000\u0000%c %u %u %u %d %*s %*s %*s %*s %*s %*s %lu %lu %*s %*s %*s %ld %*s %*s %lu %lu %lu \u0000/proc/%u/cmdline\u0000\u0000\u0000\u0000[%s]\u0000\u0000\u0000\u0000%s",
+            "uid": " descend into directory '%s'? \u0000\u0000\u0000%s",
+            "gid": " remove directory '%s'? \u0000%s",
+            "home": " cannot create backup copy '%s'\u0000warning",
+            "shell": " cannot lock '%s'\u0000ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+            "has_shell": false
+          }
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:09.181614"
+    },
+    {
+      "id": "d195404a",
+      "category": "HARDCODED_CREDS",
+      "title": "ログイン可能なアカウントを検出",
+      "description": "2個のシェルアクセス可能なアカウントを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware2/usr/etc/passwd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "accounts": [
+          {
+            "username": "root",
+            "uid": "0",
+            "gid": "0",
+            "home": "/",
+            "shell": "/bin/sh",
+            "has_shell": true
+          },
+          {
+            "username": "nobody",
+            "uid": "99",
+            "gid": "99",
+            "home": "/",
+            "shell": "/sbin/sh",
+            "has_shell": false
+          }
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:09.181717"
+    }
+  ],
+  "verification_results": [
+    {
+      "finding_id": "334e426e",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.572845"
+    },
+    {
+      "finding_id": "d6367ebd",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.572968"
+    },
+    {
+      "finding_id": "7d26288a",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573039"
+    },
+    {
+      "finding_id": "8d5060d6",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573108"
+    },
+    {
+      "finding_id": "252b5467",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573169"
+    },
+    {
+      "finding_id": "5ae87980",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573231"
+    },
+    {
+      "finding_id": "bd424bee",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573295"
+    },
+    {
+      "finding_id": "af3a14a9",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573362"
+    },
+    {
+      "finding_id": "11f5071c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573424"
+    },
+    {
+      "finding_id": "b56aa9b4",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573481"
+    },
+    {
+      "finding_id": "637d2442",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573538"
+    },
+    {
+      "finding_id": "800db736",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573587"
+    },
+    {
+      "finding_id": "db811e57",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573657"
+    },
+    {
+      "finding_id": "a74b9088",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573719"
+    },
+    {
+      "finding_id": "310e05d4",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573788"
+    },
+    {
+      "finding_id": "c9c32372",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573848"
+    },
+    {
+      "finding_id": "bfd23afd",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573908"
+    },
+    {
+      "finding_id": "b8f0f44e",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.573967"
+    },
+    {
+      "finding_id": "b283bfa2",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574027"
+    },
+    {
+      "finding_id": "ace294e9",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574086"
+    },
+    {
+      "finding_id": "6a7b0211",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574146"
+    },
+    {
+      "finding_id": "8cc722e8",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574204"
+    },
+    {
+      "finding_id": "e87efd3c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574263"
+    },
+    {
+      "finding_id": "a3e39697",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574322"
+    },
+    {
+      "finding_id": "ac587817",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574379"
+    },
+    {
+      "finding_id": "05a9efa0",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574438"
+    },
+    {
+      "finding_id": "7d216d4e",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574495"
+    },
+    {
+      "finding_id": "94185aff",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574551"
+    },
+    {
+      "finding_id": "dcf23f9f",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574610"
+    },
+    {
+      "finding_id": "a8a82c9c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574667"
+    },
+    {
+      "finding_id": "a1e69f48",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574724"
+    },
+    {
+      "finding_id": "e20aaff9",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574782"
+    },
+    {
+      "finding_id": "30868dc9",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574839"
+    },
+    {
+      "finding_id": "f35d3e76",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574899"
+    },
+    {
+      "finding_id": "ab139594",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.574959"
+    },
+    {
+      "finding_id": "ee3b66cc",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575019"
+    },
+    {
+      "finding_id": "656d0ff8",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575081"
+    },
+    {
+      "finding_id": "8d7661d2",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575140"
+    },
+    {
+      "finding_id": "bb59df03",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575198"
+    },
+    {
+      "finding_id": "d203e7b5",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575296"
+    },
+    {
+      "finding_id": "719bc384",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575410"
+    },
+    {
+      "finding_id": "92907899",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575491"
+    },
+    {
+      "finding_id": "b0bafbc8",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575559"
+    },
+    {
+      "finding_id": "8ef6ad68",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575623"
+    },
+    {
+      "finding_id": "cbabd44d",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575684"
+    },
+    {
+      "finding_id": "35a982db",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575746"
+    },
+    {
+      "finding_id": "e70a3423",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575810"
+    },
+    {
+      "finding_id": "bd7842f2",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575872"
+    },
+    {
+      "finding_id": "4dabd424",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575933"
+    },
+    {
+      "finding_id": "cca2bbe0",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.575994"
+    },
+    {
+      "finding_id": "ee10b88a",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576054"
+    },
+    {
+      "finding_id": "b9462864",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576114"
+    },
+    {
+      "finding_id": "b1114df3",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576174"
+    },
+    {
+      "finding_id": "98575552",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576237"
+    },
+    {
+      "finding_id": "2d350aae",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576297"
+    },
+    {
+      "finding_id": "92b4506a",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576356"
+    },
+    {
+      "finding_id": "780bb5c9",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576417"
+    },
+    {
+      "finding_id": "17b5a6ad",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576470"
+    },
+    {
+      "finding_id": "ce80b2f0",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576531"
+    },
+    {
+      "finding_id": "66eb6940",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576590"
+    },
+    {
+      "finding_id": "1d066b72",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576650"
+    },
+    {
+      "finding_id": "1a277dec",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576709"
+    },
+    {
+      "finding_id": "de5c1b78",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576767"
+    },
+    {
+      "finding_id": "81ec31f7",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576829"
+    },
+    {
+      "finding_id": "1a7d2799",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576889"
+    },
+    {
+      "finding_id": "ac23a92e",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.576953"
+    },
+    {
+      "finding_id": "d916f3bd",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577013"
+    },
+    {
+      "finding_id": "b708d241",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577071"
+    },
+    {
+      "finding_id": "221ff64b",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577130"
+    },
+    {
+      "finding_id": "b86c808c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577187"
+    },
+    {
+      "finding_id": "073ac06c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577246"
+    },
+    {
+      "finding_id": "efde852d",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577303"
+    },
+    {
+      "finding_id": "e8f30764",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577360"
+    },
+    {
+      "finding_id": "ebbfd686",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577419"
+    },
+    {
+      "finding_id": "1cf8d8d3",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577475"
+    },
+    {
+      "finding_id": "bbdfabac",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577532"
+    },
+    {
+      "finding_id": "133638ae",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577591"
+    },
+    {
+      "finding_id": "c403fb60",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577648"
+    },
+    {
+      "finding_id": "a5e0a3f7",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577707"
+    },
+    {
+      "finding_id": "860ce15a",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577771"
+    },
+    {
+      "finding_id": "a0adc8e1",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577836"
+    },
+    {
+      "finding_id": "8962edc1",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577894"
+    },
+    {
+      "finding_id": "ba38c111",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.577951"
+    },
+    {
+      "finding_id": "7a5db142",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578010"
+    },
+    {
+      "finding_id": "4b7b43b8",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578067"
+    },
+    {
+      "finding_id": "b224b68c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578124"
+    },
+    {
+      "finding_id": "9803fd37",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578182"
+    },
+    {
+      "finding_id": "4de493bd",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578239"
+    },
+    {
+      "finding_id": "6babd8f0",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578298"
+    },
+    {
+      "finding_id": "277df7b1",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578355"
+    },
+    {
+      "finding_id": "f1ae1366",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578412"
+    },
+    {
+      "finding_id": "06804e1d",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578470"
+    },
+    {
+      "finding_id": "825217be",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578527"
+    },
+    {
+      "finding_id": "671f5338",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578585"
+    },
+    {
+      "finding_id": "daf045cc",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578645"
+    },
+    {
+      "finding_id": "c5789b98",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578745"
+    },
+    {
+      "finding_id": "4cca7125",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578847"
+    },
+    {
+      "finding_id": "eaf388b7",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578924"
+    },
+    {
+      "finding_id": "9b97b990",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.578990"
+    },
+    {
+      "finding_id": "22c8a3e5",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.579049"
+    },
+    {
+      "finding_id": "eea61608",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.579114"
+    },
+    {
+      "finding_id": "015a7ecc",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.579176"
+    },
+    {
+      "finding_id": "cee08861",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.579238"
+    },
+    {
+      "finding_id": "9e797ef9",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.579301"
+    },
+    {
+      "finding_id": "d107be84",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.579362"
+    },
+    {
+      "finding_id": "99281c9f",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.579423"
+    },
+    {
+      "finding_id": "d195404a",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:09.579480"
+    }
+  ]
+}

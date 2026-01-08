@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファームウェア解析レポート - firmware1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 40px 20px; margin-bottom: 30px; border-radius: 10px; }
+        header h1 { font-size: 2em; margin-bottom: 10px; }
+        header p { opacity: 0.8; }
+        .card { background: white; border-radius: 10px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .card h2 { color: #1a1a2e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #eee; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-item { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; text-align: center; }
+        .stat-item.critical { background: linear-gradient(135deg, #ff416c, #ff4b2b); }
+        .stat-item.high { background: linear-gradient(135deg, #f2994a, #f2c94c); }
+        .stat-item.medium { background: linear-gradient(135deg, #56ccf2, #2f80ed); }
+        .stat-number { font-size: 2.5em; font-weight: bold; }
+        .stat-label { opacity: 0.9; margin-top: 5px; }
+        .finding { border-left: 4px solid #ddd; padding: 15px; margin-bottom: 15px; background: #fafafa; border-radius: 0 5px 5px 0; }
+        .finding.critical { border-left-color: #ff4b2b; }
+        .finding.high { border-left-color: #f2994a; }
+        .finding.medium { border-left-color: #2f80ed; }
+        .finding.low { border-left-color: #27ae60; }
+        .finding h3 { color: #1a1a2e; margin-bottom: 10px; }
+        .finding-meta { display: flex; gap: 15px; margin-bottom: 10px; font-size: 0.9em; color: #666; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 15px; font-size: 0.8em; font-weight: bold; }
+        .badge.critical { background: #ff4b2b; color: white; }
+        .badge.high { background: #f2994a; color: white; }
+        .badge.medium { background: #2f80ed; color: white; }
+        .badge.low { background: #27ae60; color: white; }
+        .badge.verified { background: #e74c3c; color: white; }
+        .badge.suspicious { background: #e67e22; color: white; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; font-size: 0.85em; }
+        .recommendations { background: #e8f5e9; padding: 15px; border-radius: 5px; margin-top: 15px; }
+        .recommendations h4 { color: #2e7d32; margin-bottom: 10px; }
+        .recommendations li { margin-left: 20px; margin-bottom: 5px; }
+        footer { text-align: center; padding: 20px; color: #666; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ファームウェア不正機能検知レポート</h1>
+            <p>firmware1 | 生成日時: 2026-01-08 10:25:06</p>
+        </header>
+
+        <div class="stat-grid">
+            <div class="stat-item">
+                <div class="stat-number">72</div>
+                <div class="stat-label">検出された不審項目</div>
+            </div>
+            <div class="stat-item critical">
+                <div class="stat-number">0</div>
+                <div class="stat-label">緊急</div>
+            </div>
+            <div class="stat-item high">
+                <div class="stat-number">41</div>
+                <div class="stat-label">高</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">悪意ありと確認</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>基本情報</h2>
+            <table style="width:100%; border-collapse: collapse;">
+                <tr><td style="padding:8px; border-bottom:1px solid #eee;"><strong>ファームウェア名</strong></td><td style="padding:8px; border-bottom:1px solid #eee;">firmware1</td></tr>
+                <tr><td style="padding:8px; border-bottom:1px solid #eee;"><strong>パス</strong></td><td style="padding:8px; border-bottom:1px solid #eee;">/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1</td></tr>
+                <tr><td style="padding:8px; border-bottom:1px solid #eee;"><strong>解析開始</strong></td><td style="padding:8px; border-bottom:1px solid #eee;">2026-01-08 10:24:47.923671</td></tr>
+                <tr><td style="padding:8px; border-bottom:1px solid #eee;"><strong>解析終了</strong></td><td style="padding:8px; border-bottom:1px solid #eee;">2026-01-08 10:25:06.361358</td></tr>
+                <tr><td style="padding:8px;"><strong>セッションID</strong></td><td style="padding:8px;">583a3dbc</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>検出された不審機能</h2>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 1a8a5f67</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:             password = "admin";</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/init.1733481622767.html</code> (行 522)</p>
+                <pre>            password = "admin";</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 18b85717</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:             password = "admin";</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/login.html</code> (行 1344)</p>
+                <pre>            password = "admin";</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 6f3bdecf</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:         <WEPKey access="readWrite" maxLength="13" minLength="13" password="y" syntax="hexBinary">123</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml</code> (行 579)</p>
+                <pre>        &lt;WEPKey access="readWrite" maxLength="13" minLength="13" password="y" syntax="hexBinary"&gt;123456789a&lt;/WEPKey&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 556afb61</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:         <PreSharedKey access="readWrite" maxLength="32" password="y" syntax="hexBinary"/></p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml</code> (行 580)</p>
+                <pre>        &lt;PreSharedKey access="readWrite" maxLength="32" password="y" syntax="hexBinary"/&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 0fba7bd3</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:         <RadiusSecret access="readWrite" password="y" syntax="string">radius_secret</RadiusSecret></p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml</code> (行 587)</p>
+                <pre>        &lt;RadiusSecret access="readWrite" password="y" syntax="string"&gt;radius_secret&lt;/RadiusSecret&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 3f272346</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:         <SecondaryRadiusSecret access="readWrite" password="y" syntax="string">radius_secret</Second</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml</code> (行 588)</p>
+                <pre>        &lt;SecondaryRadiusSecret access="readWrite" password="y" syntax="string"&gt;radius_secret&lt;/SecondaryRadiusSecret&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 8bab620c</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:         <WaveWDSKey access="readWrite" maxLength="26" minLength="10" password="y" syntax="hexBinary"</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml</code> (行 655)</p>
+                <pre>        &lt;WaveWDSKey access="readWrite" maxLength="26" minLength="10" password="y" syntax="hexBinary"&gt;123456789a&lt;/WaveWDSKey&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: fa61d50d</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:           <WEPKey access="readWrite" maxLength="13" minLength="13" password="y" syntax="hexBinary">1</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml</code> (行 866)</p>
+                <pre>          &lt;WEPKey access="readWrite" maxLength="13" minLength="13" password="y" syntax="hexBinary"&gt;123456789a&lt;/WEPKey&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: f3546218</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出:           <PreSharedKey access="readWrite" maxLength="32" password="y" syntax="hexBinary"/></p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml</code> (行 867)</p>
+                <pre>          &lt;PreSharedKey access="readWrite" maxLength="32" password="y" syntax="hexBinary"/&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: bc1cde58</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出: 	local token="$1"</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/lib/functions/block.sh</code> (行 157)</p>
+                <pre>	local token="$1"</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: dda6a8c7</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出: root:x:0:0:99999:7:::</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/shadow</code> (行 1)</p>
+                <pre>root:x:0:0:99999:7:::</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>ハードコードされた認証情報の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 83d16110</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>認証情報らしきパターンを検出: root:x:0:0:root:/root:/bin/ash</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/passwd</code> (行 1)</p>
+                <pre>root:x:0:0:root:/root:/bin/ash</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>隠しサービスの可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: c9bc5251</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>隠しサービスまたは非標準ポートのサービスを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/proftpd/proftpd.conf</code> (行 2)</p>
+                <pre># 'proftpd.conf' for actual use.  It establishes a single server</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: gratuitous_arp</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: d0a8b21a</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/sbin/gratuitous_arp</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/sbin/gratuitous_arp</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: OperatingStandards5.json</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 077d0f2f</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards5.json</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards5.json</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: adv_wlanlogger5_configuration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 9490c6f1</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger5_configuration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger5_configuration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: OperatingChannelBandwidth2.json</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 7a5dd43c</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingChannelBandwidth2.json</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingChannelBandwidth2.json</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: operatingstandards_1.json</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 1def310b</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/operatingstandards_1.json</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/operatingstandards_1.json</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: adv_wlanlogger_configuration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: dd10bec1</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger_configuration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger_configuration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: autowan_configuration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: ec740643</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/autowan_configuration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/autowan_configuration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: OperatingStandards2.json</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: fab247f4</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards2.json</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards2.json</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: hotspot_configuration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 5a6e75e5</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/hotspot_configuration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/hotspot_configuration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: autowan_configurationform.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 7fcc9685</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/autowan_configurationform.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/autowan_configurationform.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: adv_wlanlogger5_2_configuration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: a37f7aa9</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger5_2_configuration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger5_2_configuration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: adv5_hotspot_configuration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: d3f5788d</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv5_hotspot_configuration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv5_hotspot_configuration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: OperatingStandards5ieee.json</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 3757dc30</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards5ieee.json</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards5ieee.json</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: adv5_2_hotspot_configuration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: cdcc82b0</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv5_2_hotspot_configuration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv5_2_hotspot_configuration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: rip_configuration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: e83d8dbc</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/rip_configuration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/rip_configuration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: multicast_mcconfiguration.xml</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: f9316f5b</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/multicast_mcconfiguration.xml</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/multicast_mcconfiguration.xml</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: operatingstandards.json</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 58ac1349</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/operatingstandards.json</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/operatingstandards.json</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: configuration-1.png</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 6a093f4d</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/configuration-1.png</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/configuration-1.png</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: configuration-0.png</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: c59befc6</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/icons/configuration-0.png</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/icons/configuration-0.png</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: configuration-1.png</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 4af5cbab</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/icons/configuration-1.png</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/icons/configuration-1.png</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: hotspot_configuration.json</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: ca15102b</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/languages/de/hotspot_configuration.json</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/languages/de/hotspot_configuration.json</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: hotspot_configuration.json</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 04c8e58c</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/languages/en/hotspot_configuration.json</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/languages/en/hotspot_configuration.json</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 5f3b2662</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio0/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio0/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 642e9d76</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio4/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio4/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: a1a882f0</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio2/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio2/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: ded781c8</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/instance/wlan0/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/instance/wlan0/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: SUSPICIOUS_BINARY</span>
+                    <span>ID: 2a00cacc</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/instance/wlan2/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/instance/wlan2/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding high">
+                <h3>データ抽出機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge high">HIGH</span>
+                    <span>カテゴリ: DATA_EXFIL</span>
+                    <span>ID: 911be76e</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>外部へのデータ送信パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/lanhelp_german.html</code> (行 21)</p>
+                <pre>                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisl dolor, tristique quis tincidunt at, mattis nec leo. Sed euismod tellus ex, vitae mollis nisi egestas eget. Nullam at ex eget quam tempor interdum. Nulla at viverra ante, egestas convallis tortor. Maecenas no</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: d467facf</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 204)</p>
+                <pre>                        &lt;div id="history-collection-container"&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 16b2d4dc</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 205)</p>
+                <pre>                            &lt;table id="history-collection"&gt;&lt;/table&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 075f142c</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 228)</p>
+                <pre>                    &lt;div id="history-content"&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: d6470564</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 241)</p>
+                <pre>                        &lt;div id="empty-history-container"&gt;</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 175f8b63</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 578)</p>
+                <pre>    //history-container DOM init</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 6070a4a7</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 1065)</p>
+                <pre>        $('#history-collection').html(history);</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 70d44443</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 1091)</p>
+                <pre>            $("#empty-history-container").show();</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 2a0feab4</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 1095)</p>
+                <pre>            $("#empty-history-container").hide();</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 650f0b06</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 1462)</p>
+                <pre>        $('#history-content').show();</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: f30630d6</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html</code> (行 1721)</p>
+                <pre>        $('#history-content').hide();</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 63939b50</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/lib/iptv/iptv_network.sh</code> (行 103)</p>
+                <pre>            ubus call network.interface."$iface" disconnect 1&gt;/dev/null 2&gt;&1</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: ddb2754a</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/lib/deleteToken.sh</code> (行 9)</p>
+                <pre>ps -w|grep "$execfile $tokenfile" |grep -v grep |awk '{print $1}' |grep -v $$ |xargs kill -9 &gt;/dev/null 2&gt;&1</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: aceaff9c</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/scripts/fapi_wlan_wave_lib_common.sh</code> (行 3898)</p>
+                <pre>			grep -f $alumnus_execute ${HS20_COMMANDS_SAVE}_$radio_name &gt;/dev/null 2&gt;&1 &gt; /tmp/match_lines</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>アンチフォレンジック機能の可能性</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: ANTI_FORENSICS</span>
+                    <span>ID: 96c74ae3</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>ログ消去などの痕跡隠蔽パターンを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/dialogue/ngDialog.min.js</code> (行 2)</p>
+                <pre>!function(a,b){"undefined"!=typeof module&&module.exports?"undefined"==typeof angular?(b(require("angular")),module.exports="ngDialog"):(b(angular),module.exports="ngDialog"):"function"==typeof define&&define.amd?define(["ng-dialog"],function(){b(a.angular)}):b(a.angular)}(this,function(a){"use stri</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>ログイン可能なアカウントを検出</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: f813aa93</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>7個のシェルアクセス可能なアカウントを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/passwd</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>ログイン可能なアカウントを検出</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HARDCODED_CREDS</span>
+                    <span>ID: 830aab12</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>37個のシェルアクセス可能なアカウントを検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/usr/bin/passwd</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>デフォルトパスワードを変更してください</li>
+                        <li>認証情報のローテーションポリシーを確立してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: boot</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: 2e6c5d03</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/boot</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: proftpd</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: fe50b7cd</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/proftpd</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: uhttpd</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: 651bb868</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/uhttpd</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: pptpd</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: 05a607b4</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/pptpd</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: samba</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: 1d28bc1b</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/samba</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: S10boot</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: e9f0dddd</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S10boot</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: K98boot</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: fa652e94</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/K98boot</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: S60pptpd</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: e9cdd7e4</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S60pptpd</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: S71proftpd</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: 245955ec</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S71proftpd</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: S60samba</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: 8046815c</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S60samba</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>init.dスクリプトに不審なコードを検出: S50uhttpd</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: HIDDEN_SERVICE</span>
+                    <span>ID: 50e3a3af</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>起動時に実行される不審なサービスを発見</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S50uhttpd</code></p>
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+                        <li>不要なサービスを無効化してください</li>
+                        <li>ファイアウォールで不要なポートをブロックしてください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>不審なネットワーク設定</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: SUSPICIOUS_NETWORK</span>
+                    <span>ID: a6ac746a</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審なファイアウォール/ネットワーク設定を検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/etc/uci_to_ipsec_config.sh</code> (行 197)</p>
+                <pre>		iptables -I INPUT -s $remote_ip/32 -d $my_ip/32 -j ACCEPT</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>不審なネットワーク設定</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: SUSPICIOUS_NETWORK</span>
+                    <span>ID: 2db4cbbf</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審なファイアウォール/ネットワーク設定を検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/data/menu.advanced.json</code> (行 37)</p>
+                <pre>			"name": "nat-forwarding",</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>不審なネットワーク設定</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: SUSPICIOUS_NETWORK</span>
+                    <span>ID: 04d7a173</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審なファイアウォール/ネットワーク設定を検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/frame/advanced.1733481622767.html</code> (行 326)</p>
+                <pre>	"nat-forwarding":{		</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="finding medium">
+                <h3>不審なネットワーク設定</h3>
+                <div class="finding-meta">
+                    <span class="badge medium">MEDIUM</span>
+                    <span>カテゴリ: SUSPICIOUS_NETWORK</span>
+                    <span>ID: 8c49171b</span>
+                    <span class="badge suspicious">疑わしい</span>
+                </div>
+                <p>不審なファイアウォール/ネットワーク設定を検出</p>
+
+                <p><strong>検出場所:</strong> <code>/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/frame/advanced_v2_ru.1733481622767.html</code> (行 326)</p>
+                <pre>	"nat-forwarding":{</pre>
+
+                <div class="recommendations">
+                    <h4>推奨対応</h4>
+                    <ul>
+                        <li>詳細な調査を実施してください</li>
+                        <li>製造元に問い合わせて意図的な機能かを確認してください</li>
+                        <li>ネットワークセグメンテーションで影響を限定してください</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer>
+            <p>このレポートは自動解析システムによって生成されました。</p>
+            <p>検出された項目は人間による確認を推奨します。</p>
+        </footer>
+    </div>
+</body>
+</html>

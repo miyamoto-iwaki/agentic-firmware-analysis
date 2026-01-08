@@ -1,0 +1,3190 @@
+{
+  "metadata": {
+    "session_id": "583a3dbc",
+    "firmware_name": "firmware1",
+    "firmware_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1",
+    "start_time": "2026-01-08T10:24:47.923671",
+    "end_time": "2026-01-08T10:25:06.361358",
+    "status": "completed",
+    "report_generated": "2026-01-08T10:25:06.362335"
+  },
+  "summary": {
+    "total_findings": 72,
+    "total_verifications": 72,
+    "severity_breakdown": {
+      "high": 41,
+      "medium": 31
+    },
+    "category_breakdown": {
+      "HARDCODED_CREDS": 14,
+      "HIDDEN_SERVICE": 12,
+      "SUSPICIOUS_BINARY": 27,
+      "DATA_EXFIL": 1,
+      "ANTI_FORENSICS": 14,
+      "SUSPICIOUS_NETWORK": 4
+    },
+    "verification_status_breakdown": {
+      "verified_suspicious": 72
+    }
+  },
+  "findings": [
+    {
+      "id": "1a8a5f67",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:             password = \"admin\";",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/init.1733481622767.html",
+        "line_number": 522,
+        "context": "            password = \"admin\";"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "            password = \"admin\";",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771046"
+    },
+    {
+      "id": "18b85717",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:             password = \"admin\";",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/login.html",
+        "line_number": 1344,
+        "context": "            password = \"admin\";"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "            password = \"admin\";",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771066"
+    },
+    {
+      "id": "6f3bdecf",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:         <WEPKey access=\"readWrite\" maxLength=\"13\" minLength=\"13\" password=\"y\" syntax=\"hexBinary\">123",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml",
+        "line_number": 579,
+        "context": "        <WEPKey access=\"readWrite\" maxLength=\"13\" minLength=\"13\" password=\"y\" syntax=\"hexBinary\">123456789a</WEPKey>"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "        <WEPKey access=\"readWrite\" maxLength=\"13\" minLength=\"13\" password=\"y\" syntax=\"hexBinary\">123456789a</WEPKey>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771071"
+    },
+    {
+      "id": "556afb61",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:         <PreSharedKey access=\"readWrite\" maxLength=\"32\" password=\"y\" syntax=\"hexBinary\"/>",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml",
+        "line_number": 580,
+        "context": "        <PreSharedKey access=\"readWrite\" maxLength=\"32\" password=\"y\" syntax=\"hexBinary\"/>"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "        <PreSharedKey access=\"readWrite\" maxLength=\"32\" password=\"y\" syntax=\"hexBinary\"/>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771076"
+    },
+    {
+      "id": "0fba7bd3",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:         <RadiusSecret access=\"readWrite\" password=\"y\" syntax=\"string\">radius_secret</RadiusSecret>",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml",
+        "line_number": 587,
+        "context": "        <RadiusSecret access=\"readWrite\" password=\"y\" syntax=\"string\">radius_secret</RadiusSecret>"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "        <RadiusSecret access=\"readWrite\" password=\"y\" syntax=\"string\">radius_secret</RadiusSecret>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771080"
+    },
+    {
+      "id": "3f272346",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:         <SecondaryRadiusSecret access=\"readWrite\" password=\"y\" syntax=\"string\">radius_secret</Second",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml",
+        "line_number": 588,
+        "context": "        <SecondaryRadiusSecret access=\"readWrite\" password=\"y\" syntax=\"string\">radius_secret</SecondaryRadiusSecret>"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "        <SecondaryRadiusSecret access=\"readWrite\" password=\"y\" syntax=\"string\">radius_secret</SecondaryRadiusSecret>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771084"
+    },
+    {
+      "id": "8bab620c",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:         <WaveWDSKey access=\"readWrite\" maxLength=\"26\" minLength=\"10\" password=\"y\" syntax=\"hexBinary\"",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml",
+        "line_number": 655,
+        "context": "        <WaveWDSKey access=\"readWrite\" maxLength=\"26\" minLength=\"10\" password=\"y\" syntax=\"hexBinary\">123456789a</WaveWDSKey>"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "        <WaveWDSKey access=\"readWrite\" maxLength=\"26\" minLength=\"10\" password=\"y\" syntax=\"hexBinary\">123456789a</WaveWDSKey>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771088"
+    },
+    {
+      "id": "fa61d50d",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:           <WEPKey access=\"readWrite\" maxLength=\"13\" minLength=\"13\" password=\"y\" syntax=\"hexBinary\">1",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml",
+        "line_number": 866,
+        "context": "          <WEPKey access=\"readWrite\" maxLength=\"13\" minLength=\"13\" password=\"y\" syntax=\"hexBinary\">123456789a</WEPKey>"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "          <WEPKey access=\"readWrite\" maxLength=\"13\" minLength=\"13\" password=\"y\" syntax=\"hexBinary\">123456789a</WEPKey>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771091"
+    },
+    {
+      "id": "f3546218",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出:           <PreSharedKey access=\"readWrite\" maxLength=\"32\" password=\"y\" syntax=\"hexBinary\"/>",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/WiFi_control.xml",
+        "line_number": 867,
+        "context": "          <PreSharedKey access=\"readWrite\" maxLength=\"32\" password=\"y\" syntax=\"hexBinary\"/>"
+      },
+      "pattern_matched": "password\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "          <PreSharedKey access=\"readWrite\" maxLength=\"32\" password=\"y\" syntax=\"hexBinary\"/>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:48.771094"
+    },
+    {
+      "id": "bc1cde58",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出: \tlocal token=\"$1\"",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/lib/functions/block.sh",
+        "line_number": 157,
+        "context": "\tlocal token=\"$1\""
+      },
+      "pattern_matched": "token\\s*[=:]\\s*[\"\\'][^\"\\']+[\"\\']",
+      "raw_content": "\tlocal token=\"$1\"",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:50.715422"
+    },
+    {
+      "id": "dda6a8c7",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出: root:x:0:0:99999:7:::",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/shadow",
+        "line_number": 1,
+        "context": "root:x:0:0:99999:7:::"
+      },
+      "pattern_matched": "root:[^:]*:[0-9]+:",
+      "raw_content": "root:x:0:0:99999:7:::",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:51.723762"
+    },
+    {
+      "id": "83d16110",
+      "category": "HARDCODED_CREDS",
+      "title": "ハードコードされた認証情報の可能性",
+      "description": "認証情報らしきパターンを検出: root:x:0:0:root:/root:/bin/ash",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/passwd",
+        "line_number": 1,
+        "context": "root:x:0:0:root:/root:/bin/ash"
+      },
+      "pattern_matched": "root:[^:]*:[0-9]+:",
+      "raw_content": "root:x:0:0:root:/root:/bin/ash",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:51.723782"
+    },
+    {
+      "id": "c9bc5251",
+      "category": "HIDDEN_SERVICE",
+      "title": "隠しサービスの可能性",
+      "description": "隠しサービスまたは非標準ポートのサービスを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/proftpd/proftpd.conf",
+        "line_number": 2,
+        "context": "# 'proftpd.conf' for actual use.  It establishes a single server"
+      },
+      "pattern_matched": "ftpd",
+      "raw_content": "# 'proftpd.conf' for actual use.  It establishes a single server",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:24:57.320370"
+    },
+    {
+      "id": "d0a8b21a",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: gratuitous_arp",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/sbin/gratuitous_arp",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/sbin/gratuitous_arp",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "gratuitous_arp",
+        "matched_pattern": "rat",
+        "size": 489
+      },
+      "timestamp": "2026-01-08T10:24:58.357525"
+    },
+    {
+      "id": "077d0f2f",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: OperatingStandards5.json",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards5.json",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards5.json",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "OperatingStandards5.json",
+        "matched_pattern": "rat",
+        "size": 323818
+      },
+      "timestamp": "2026-01-08T10:24:58.361096"
+    },
+    {
+      "id": "9490c6f1",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: adv_wlanlogger5_configuration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger5_configuration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger5_configuration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "adv_wlanlogger5_configuration.xml",
+        "matched_pattern": "rat",
+        "size": 907
+      },
+      "timestamp": "2026-01-08T10:24:58.361117"
+    },
+    {
+      "id": "7a5dd43c",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: OperatingChannelBandwidth2.json",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingChannelBandwidth2.json",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingChannelBandwidth2.json",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "OperatingChannelBandwidth2.json",
+        "matched_pattern": "rat",
+        "size": 2344
+      },
+      "timestamp": "2026-01-08T10:24:58.361144"
+    },
+    {
+      "id": "1def310b",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: operatingstandards_1.json",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/operatingstandards_1.json",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/operatingstandards_1.json",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "operatingstandards_1.json",
+        "matched_pattern": "rat",
+        "size": 236
+      },
+      "timestamp": "2026-01-08T10:24:58.361177"
+    },
+    {
+      "id": "dd10bec1",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: adv_wlanlogger_configuration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger_configuration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger_configuration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "adv_wlanlogger_configuration.xml",
+        "matched_pattern": "rat",
+        "size": 907
+      },
+      "timestamp": "2026-01-08T10:24:58.361217"
+    },
+    {
+      "id": "ec740643",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: autowan_configuration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/autowan_configuration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/autowan_configuration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "autowan_configuration.xml",
+        "matched_pattern": "rat",
+        "size": 1656
+      },
+      "timestamp": "2026-01-08T10:24:58.361261"
+    },
+    {
+      "id": "fab247f4",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: OperatingStandards2.json",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards2.json",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards2.json",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "OperatingStandards2.json",
+        "matched_pattern": "rat",
+        "size": 510804
+      },
+      "timestamp": "2026-01-08T10:24:58.361301"
+    },
+    {
+      "id": "5a6e75e5",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: hotspot_configuration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/hotspot_configuration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/hotspot_configuration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "hotspot_configuration.xml",
+        "matched_pattern": "rat",
+        "size": 10106
+      },
+      "timestamp": "2026-01-08T10:24:58.361357"
+    },
+    {
+      "id": "7fcc9685",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: autowan_configurationform.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/autowan_configurationform.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/autowan_configurationform.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "autowan_configurationform.xml",
+        "matched_pattern": "rat",
+        "size": 1212
+      },
+      "timestamp": "2026-01-08T10:24:58.361389"
+    },
+    {
+      "id": "a37f7aa9",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: adv_wlanlogger5_2_configuration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger5_2_configuration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv_wlanlogger5_2_configuration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "adv_wlanlogger5_2_configuration.xml",
+        "matched_pattern": "rat",
+        "size": 907
+      },
+      "timestamp": "2026-01-08T10:24:58.361471"
+    },
+    {
+      "id": "d3f5788d",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: adv5_hotspot_configuration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv5_hotspot_configuration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv5_hotspot_configuration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "adv5_hotspot_configuration.xml",
+        "matched_pattern": "rat",
+        "size": 10106
+      },
+      "timestamp": "2026-01-08T10:24:58.361491"
+    },
+    {
+      "id": "3757dc30",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: OperatingStandards5ieee.json",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards5ieee.json",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/OperatingStandards5ieee.json",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "OperatingStandards5ieee.json",
+        "matched_pattern": "rat",
+        "size": 963358
+      },
+      "timestamp": "2026-01-08T10:24:58.361535"
+    },
+    {
+      "id": "cdcc82b0",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: adv5_2_hotspot_configuration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv5_2_hotspot_configuration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/adv5_2_hotspot_configuration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "adv5_2_hotspot_configuration.xml",
+        "matched_pattern": "rat",
+        "size": 10107
+      },
+      "timestamp": "2026-01-08T10:24:58.361555"
+    },
+    {
+      "id": "e83d8dbc",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: rip_configuration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/rip_configuration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/rip_configuration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "rip_configuration.xml",
+        "matched_pattern": "rat",
+        "size": 900
+      },
+      "timestamp": "2026-01-08T10:24:58.361584"
+    },
+    {
+      "id": "f9316f5b",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: multicast_mcconfiguration.xml",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/multicast_mcconfiguration.xml",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/multicast_mcconfiguration.xml",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "multicast_mcconfiguration.xml",
+        "matched_pattern": "rat",
+        "size": 1775
+      },
+      "timestamp": "2026-01-08T10:24:58.361597"
+    },
+    {
+      "id": "58ac1349",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: operatingstandards.json",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/operatingstandards.json",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/operatingstandards.json",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "operatingstandards.json",
+        "matched_pattern": "rat",
+        "size": 244
+      },
+      "timestamp": "2026-01-08T10:24:58.361607"
+    },
+    {
+      "id": "6a093f4d",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: configuration-1.png",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/configuration-1.png",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/configuration-1.png",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "configuration-1.png",
+        "matched_pattern": "rat",
+        "size": 2950
+      },
+      "timestamp": "2026-01-08T10:24:58.362846"
+    },
+    {
+      "id": "c59befc6",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: configuration-0.png",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/icons/configuration-0.png",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/icons/configuration-0.png",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "configuration-0.png",
+        "matched_pattern": "rat",
+        "size": 2647
+      },
+      "timestamp": "2026-01-08T10:24:58.363032"
+    },
+    {
+      "id": "4af5cbab",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: configuration-1.png",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/icons/configuration-1.png",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/images/icons/configuration-1.png",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "configuration-1.png",
+        "matched_pattern": "rat",
+        "size": 2950
+      },
+      "timestamp": "2026-01-08T10:24:58.363043"
+    },
+    {
+      "id": "ca15102b",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: hotspot_configuration.json",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/languages/de/hotspot_configuration.json",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/languages/de/hotspot_configuration.json",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "hotspot_configuration.json",
+        "matched_pattern": "rat",
+        "size": 1476
+      },
+      "timestamp": "2026-01-08T10:24:58.364766"
+    },
+    {
+      "id": "04c8e58c",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: hotspot_configuration.json",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/languages/en/hotspot_configuration.json",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/languages/en/hotspot_configuration.json",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "hotspot_configuration.json",
+        "matched_pattern": "rat",
+        "size": 1461
+      },
+      "timestamp": "2026-01-08T10:24:58.365038"
+    },
+    {
+      "id": "5f3b2662",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio0/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio0/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "matched_pattern": "rat",
+        "size": 142
+      },
+      "timestamp": "2026-01-08T10:24:58.367805"
+    },
+    {
+      "id": "642e9d76",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio4/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio4/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "matched_pattern": "rat",
+        "size": 142
+      },
+      "timestamp": "2026-01-08T10:24:58.368073"
+    },
+    {
+      "id": "a1a882f0",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio2/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/default_wave600/radio2/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "matched_pattern": "rat",
+        "size": 142
+      },
+      "timestamp": "2026-01-08T10:24:58.368231"
+    },
+    {
+      "id": "ded781c8",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/instance/wlan0/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/instance/wlan0/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "matched_pattern": "rat",
+        "size": 142
+      },
+      "timestamp": "2026-01-08T10:24:58.368643"
+    },
+    {
+      "id": "2a00cacc",
+      "category": "SUSPICIOUS_BINARY",
+      "title": "不審なバイナリ: Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "description": "不審な名前のバイナリファイルを検出: /Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/instance/wlan2/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/db/instance/wlan2/Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "filename": "Device.WiFi.AccessPoint.X_LANTIQ_COM_Vendor.HS20.OperatorFriendlyName",
+        "matched_pattern": "rat",
+        "size": 142
+      },
+      "timestamp": "2026-01-08T10:24:58.368918"
+    },
+    {
+      "id": "911be76e",
+      "category": "DATA_EXFIL",
+      "title": "データ抽出機能の可能性",
+      "description": "外部へのデータ送信パターンを検出",
+      "severity": "high",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/lanhelp_german.html",
+        "line_number": 21,
+        "context": "                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisl dolor, tristique quis tincidunt at, mattis nec leo. Sed euismod tellus ex, vitae mollis nisi egestas eget. Nullam at ex eget quam tempor interdum. Nulla at viverra ante, egestas convallis tortor. Maecenas non consequat dui, non fringilla nibh. Morbi tristique sagittis arcu ac ornare. Cras feugiat felis in orci bibendum, at accumsan quam sollicitudin. Nullam elementum, orci in egestas varius, dui metus accumsan sem, sagittis tincidunt magna libero ac arcu. Nunc vulputate volutpat purus, non viverra velit fermentum a.</p>"
+      },
+      "pattern_matched": "nc\\s+.*<\\s*/",
+      "raw_content": "                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisl dolor, tristique quis tincidunt at, mattis nec leo. Sed euismod tellus ex, vitae mollis nisi egestas eget. Nullam at ex eget quam tempor interdum. Nulla at viverra ante, egestas convallis tortor. Maecenas non consequat dui, non fringilla nibh. Morbi tristique sagittis arcu ac ornare. Cras feugiat felis in orci bibendum, at accumsan quam sollicitudin. Nullam elementum, orci in egestas varius, dui metus accumsan sem, sagittis tincidunt magna libero ac arcu. Nunc vulputate volutpat purus, non viverra velit fermentum a.</p>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.205631"
+    },
+    {
+      "id": "d467facf",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 204,
+        "context": "                        <div id=\"history-collection-container\">"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "                        <div id=\"history-collection-container\">",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671086"
+    },
+    {
+      "id": "16b2d4dc",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 205,
+        "context": "                            <table id=\"history-collection\"></table>"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "                            <table id=\"history-collection\"></table>",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671101"
+    },
+    {
+      "id": "075f142c",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 228,
+        "context": "                    <div id=\"history-content\">"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "                    <div id=\"history-content\">",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671104"
+    },
+    {
+      "id": "d6470564",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 241,
+        "context": "                        <div id=\"empty-history-container\">"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "                        <div id=\"empty-history-container\">",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671106"
+    },
+    {
+      "id": "175f8b63",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 578,
+        "context": "    //history-container DOM init"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "    //history-container DOM init",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671108"
+    },
+    {
+      "id": "6070a4a7",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 1065,
+        "context": "        $('#history-collection').html(history);"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "        $('#history-collection').html(history);",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671111"
+    },
+    {
+      "id": "70d44443",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 1091,
+        "context": "            $(\"#empty-history-container\").show();"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "            $(\"#empty-history-container\").show();",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671113"
+    },
+    {
+      "id": "2a0feab4",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 1095,
+        "context": "            $(\"#empty-history-container\").hide();"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "            $(\"#empty-history-container\").hide();",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671115"
+    },
+    {
+      "id": "650f0b06",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 1462,
+        "context": "        $('#history-content').show();"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "        $('#history-content').show();",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671117"
+    },
+    {
+      "id": "f30630d6",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/userrpm/parentalControl.1733481622767.html",
+        "line_number": 1721,
+        "context": "        $('#history-content').hide();"
+      },
+      "pattern_matched": "history\\s*-c",
+      "raw_content": "        $('#history-content').hide();",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:01.671119"
+    },
+    {
+      "id": "63939b50",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/lib/iptv/iptv_network.sh",
+        "line_number": 103,
+        "context": "            ubus call network.interface.\"$iface\" disconnect 1>/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "            ubus call network.interface.\"$iface\" disconnect 1>/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:03.369694"
+    },
+    {
+      "id": "ddb2754a",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/lib/deleteToken.sh",
+        "line_number": 9,
+        "context": "ps -w|grep \"$execfile $tokenfile\" |grep -v grep |awk '{print $1}' |grep -v $$ |xargs kill -9 >/dev/null 2>&1"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "ps -w|grep \"$execfile $tokenfile\" |grep -v grep |awk '{print $1}' |grep -v $$ |xargs kill -9 >/dev/null 2>&1",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:03.369711"
+    },
+    {
+      "id": "aceaff9c",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/wave/scripts/fapi_wlan_wave_lib_common.sh",
+        "line_number": 3898,
+        "context": "\t\t\tgrep -f $alumnus_execute ${HS20_COMMANDS_SAVE}_$radio_name >/dev/null 2>&1 > /tmp/match_lines"
+      },
+      "pattern_matched": ">/dev/null\\s+2>&1",
+      "raw_content": "\t\t\tgrep -f $alumnus_execute ${HS20_COMMANDS_SAVE}_$radio_name >/dev/null 2>&1 > /tmp/match_lines",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:03.369714"
+    },
+    {
+      "id": "96c74ae3",
+      "category": "ANTI_FORENSICS",
+      "title": "アンチフォレンジック機能の可能性",
+      "description": "ログ消去などの痕跡隠蔽パターンを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/www/dialogue/ngDialog.min.js",
+        "line_number": 2,
+        "context": "!function(a,b){\"undefined\"!=typeof module&&module.exports?\"undefined\"==typeof angular?(b(require(\"angular\")),module.exports=\"ngDialog\"):(b(angular),module.exports=\"ngDialog\"):\"function\"==typeof define&&define.amd?define([\"ng-dialog\"],function(){b(a.angular)}):b(a.angular)}(this,function(a){\"use strict\";var b=a.module(\"ngDialog\",[]),c=a.element,d=a.isDefined,e=(document.body||document.documentElement).style,f=d(e.animation)||d(e.WebkitAnimation)||d(e.MozAnimation)||d(e.MsAnimation)||d(e.OAnimation),g=\"animationend webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend\",h=\"a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]\",i=\"ngdialog-disabled-animation\",j={html:!1,body:!1},k={},l=[],m=!1;return b.provider(\"ngDialog\",function(){var b=this.defaults={className:\"ngdialog-theme-default\",disableAnimation:!1,plain:!1,showClose:!0,closeByDocument:!0,closeByEscape:!0,closeByNavigation:!1,appendTo:!1,preCloseCallback:!1,overlay:!0,cache:!0,trapFocus:!0,preserveFocus:!0,ariaAuto:!0,ariaRole:null,ariaLabelledById:null,ariaLabelledBySelector:null,ariaDescribedById:null,ariaDescribedBySelector:null};this.setForceHtmlReload=function(a){j.html=a||!1},this.setForceBodyReload=function(a){j.body=a||!1},this.setDefaults=function(c){a.extend(b,c)};var d,e=0,n=0,o={};this.$get=[\"$document\",\"$templateCache\",\"$compile\",\"$q\",\"$http\",\"$rootScope\",\"$timeout\",\"$window\",\"$controller\",\"$injector\",function(p,q,r,s,t,u,v,w,x,y){var z=[],A={onDocumentKeydown:function(a){27===a.keyCode&&B.close(\"$escape\")},activate:function(a){var b=a.data(\"$ngDialogOptions\");b.trapFocus&&(a.on(\"keydown\",A.onTrapFocusKeydown),z.body.on(\"keydown\",A.onTrapFocusKeydown))},deactivate:function(a){a.off(\"keydown\",A.onTrapFocusKeydown),z.body.off(\"keydown\",A.onTrapFocusKeydown)},deactivateAll:function(b){a.forEach(b,function(b){var c=a.element(b);A.deactivate(c)})},setBodyPadding:function(a){var b=parseInt(z.body.css(\"padding-right\")||0,10);z.body.css(\"padding-right\",b+a+\"px\"),z.body.data(\"ng-dialog-original-padding\",b),u.$broadcast(\"ngDialog.setPadding\",a)},resetBodyPadding:function(){var a=z.body.data(\"ng-dialog-original-padding\");a?z.body.css(\"padding-right\",a+\"px\"):z.body.css(\"padding-right\",\"\"),u.$broadcast(\"ngDialog.setPadding\",0)},performCloseDialog:function(a,b){var c=a.data(\"$ngDialogOptions\"),e=a.attr(\"id\"),h=k[e];if(h){if(\"undefined\"!=typeof w.Hammer){var i=h.hammerTime;i.off(\"tap\",d),i.destroy&&i.destroy(),delete h.hammerTime}else a.unbind(\"click\");1===n&&z.body.unbind(\"keydown\",A.onDocumentKeydown),a.hasClass(\"ngdialog-closing\")||(n-=1);var j=a.data(\"$ngDialogPreviousFocus\");j&&j.focus&&j.focus(),u.$broadcast(\"ngDialog.closing\",a,b),n=0>n?0:n,f&&!c.disableAnimation?(h.$destroy(),a.unbind(g).bind(g,function(){A.closeDialogElement(a,b)}).addClass(\"ngdialog-closing\")):(h.$destroy(),A.closeDialogElement(a,b)),o[e]&&(o[e].resolve({id:e,value:b,$dialog:a,remainingDialogs:n}),delete o[e]),k[e]&&delete k[e],l.splice(l.indexOf(e),1),l.length||(z.body.unbind(\"keydown\",A.onDocumentKeydown),m=!1)}},closeDialogElement:function(a,b){a.remove(),0===n&&(z.html.removeClass(\"ngdialog-open\"),z.body.removeClass(\"ngdialog-open\"),A.resetBodyPadding()),u.$broadcast(\"ngDialog.closed\",a,b)},closeDialog:function(b,c){var d=b.data(\"$ngDialogPreCloseCallback\");if(d&&a.isFunction(d)){var e=d.call(b,c);a.isObject(e)?e.closePromise?e.closePromise.then(function(){A.performCloseDialog(b,c)}):e.then(function(){A.performCloseDialog(b,c)},function(){}):e!==!1&&A.performCloseDialog(b,c)}else A.performCloseDialog(b,c)},onTrapFocusKeydown:function(b){var c,d=a.element(b.currentTarget);if(d.hasClass(\"ngdialog\"))c=d;else if(c=A.getActiveDialog(),null===c)return;var e=9===b.keyCode,f=b.shiftKey===!0;e&&A.handleTab(c,b,f)},handleTab:function(a,b,c){var d=A.getFocusableElements(a);if(0===d.length)return void(document.activeElement&&document.activeElement.blur());var e=document.activeElement,f=Array.prototype.indexOf.call(d,e),g=-1===f,h=0===f,i=f===d.length-1,j=!1;c?(g||h)&&(d[d.length-1].focus(),j=!0):(g||i)&&(d[0].focus(),j=!0),j&&(b.preventDefault(),b.stopPropagation())},autoFocus:function(a){var b=a[0],d=b.querySelector(\"*[autofocus]\");if(null===d||(d.focus(),document.activeElement!==d)){var e=A.getFocusableElements(a);if(e.length>0)return void e[0].focus();var f=A.filterVisibleElements(b.querySelectorAll(\"h1,h2,h3,h4,h5,h6,p,span\"));if(f.length>0){var g=f[0];c(g).attr(\"tabindex\",\"-1\").css(\"outline\",\"0\"),g.focus()}}},getFocusableElements:function(a){var b=a[0],c=b.querySelectorAll(h),d=A.filterTabbableElements(c);return A.filterVisibleElements(d)},filterTabbableElements:function(a){for(var b=[],d=0;d<a.length;d++){var e=a[d];\"-1\"!==c(e).attr(\"tabindex\")&&b.push(e)}return b},filterVisibleElements:function(a){for(var b=[],c=0;c<a.length;c++){var d=a[c];(d.offsetWidth>0||d.offsetHeight>0)&&b.push(d)}return b},getActiveDialog:function(){var a=document.querySelectorAll(\".ngdialog\");return 0===a.length?null:c(a[a.length-1])},applyAriaAttributes:function(a,b){if(b.ariaAuto){if(!b.ariaRole){var c=A.getFocusableElements(a).length>0?\"dialog\":\"alertdialog\";b.ariaRole=c}b.ariaLabelledBySelector||(b.ariaLabelledBySelector=\"h1,h2,h3,h4,h5,h6\"),b.ariaDescribedBySelector||(b.ariaDescribedBySelector=\"article,section,p\")}b.ariaRole&&a.attr(\"role\",b.ariaRole),A.applyAriaAttribute(a,\"aria-labelledby\",b.ariaLabelledById,b.ariaLabelledBySelector),A.applyAriaAttribute(a,\"aria-describedby\",b.ariaDescribedById,b.ariaDescribedBySelector)},applyAriaAttribute:function(a,b,d,e){if(d&&a.attr(b,d),e){var f=a.attr(\"id\"),g=a[0].querySelector(e);if(!g)return;var h=f+\"-\"+b;return c(g).attr(\"id\",h),a.attr(b,h),h}},detectUIRouter:function(){try{return a.module(\"ui.router\"),!0}catch(b){return!1}},getRouterLocationEventName:function(){return A.detectUIRouter()?\"$stateChangeSuccess\":\"$locationChangeSuccess\"}},B={open:function(f){function g(a,b){return u.$broadcast(\"ngDialog.templateLoading\",a),t.get(a,b||{}).then(function(b){return u.$broadcast(\"ngDialog.templateLoaded\",a),b.data||\"\"})}function h(b){return b?a.isString(b)&&j.plain?b:\"boolean\"!=typeof j.cache||j.cache?g(b,{cache:q}):g(b,{cache:!1}):\"Empty template\"}var j=a.copy(b),p=++e,C=\"ngdialog\"+p;l.push(C),f=f||{},a.extend(j,f);var D;o[C]=D=s.defer();var E;k[C]=E=a.isObject(j.scope)?j.scope.$new():u.$new();var F,G,H=a.extend({},j.resolve);return a.forEach(H,function(b,c){H[c]=a.isString(b)?y.get(b):y.invoke(b,null,null,c)}),s.all({template:h(j.template||j.templateUrl),locals:s.all(H)}).then(function(b){var e=b.template,f=b.locals;j.showClose&&(e+='<div class=\"ngdialog-close\"></div>');var g=j.overlay?\"\":\" ngdialog-no-overlay\";if(F=c('<div id=\"ngdialog'+p+'\" class=\"ngdialog'+g+'\"></div>'),F.html(j.overlay?'<div class=\"ngdialog-overlay\"></div><div class=\"ngdialog-content\" role=\"document\">'+e+\"</div>\":'<div class=\"ngdialog-content\" role=\"document\">'+e+\"</div>\"),F.data(\"$ngDialogOptions\",j),E.ngDialogId=C,j.data&&a.isString(j.data)){var h=j.data.replace(/^\\s*/,\"\")[0];E.ngDialogData=\"{\"===h||\"[\"===h?a.fromJson(j.data):j.data,E.ngDialogData.ngDialogId=C}else j.data&&a.isObject(j.data)&&(E.ngDialogData=j.data,E.ngDialogData.ngDialogId=C);if(j.className&&F.addClass(j.className),j.disableAnimation&&F.addClass(i),G=j.appendTo&&a.isString(j.appendTo)?a.element(document.querySelector(j.appendTo)):z.body,A.applyAriaAttributes(F,j),j.preCloseCallback){var k;a.isFunction(j.preCloseCallback)?k=j.preCloseCallback:a.isString(j.preCloseCallback)&&E&&(a.isFunction(E[j.preCloseCallback])?k=E[j.preCloseCallback]:E.$parent&&a.isFunction(E.$parent[j.preCloseCallback])?k=E.$parent[j.preCloseCallback]:u&&a.isFunction(u[j.preCloseCallback])&&(k=u[j.preCloseCallback])),k&&F.data(\"$ngDialogPreCloseCallback\",k)}if(E.closeThisDialog=function(a){A.closeDialog(F,a)},j.controller&&(a.isString(j.controller)||a.isArray(j.controller)||a.isFunction(j.controller))){var l;j.controllerAs&&a.isString(j.controllerAs)&&(l=j.controllerAs);var o=x(j.controller,a.extend(f,{$scope:E,$element:F}),null,l);F.data(\"$ngDialogControllerController\",o)}if(v(function(){var a=document.querySelectorAll(\".ngdialog\");A.deactivateAll(a),r(F)(E);var b=w.innerWidth-z.body.prop(\"clientWidth\");z.html.addClass(\"ngdialog-open\"),z.body.addClass(\"ngdialog-open\");var c=b-(w.innerWidth-z.body.prop(\"clientWidth\"));c>0&&A.setBodyPadding(c),G.append(F),A.activate(F),j.trapFocus&&A.autoFocus(F),j.name?u.$broadcast(\"ngDialog.opened\",{dialog:F,name:j.name}):u.$broadcast(\"ngDialog.opened\",F)}),m||(z.body.bind(\"keydown\",A.onDocumentKeydown),m=!0),j.closeByNavigation){var q=A.getRouterLocationEventName();u.$on(q,function(){A.closeDialog(F)})}if(j.preserveFocus&&F.data(\"$ngDialogPreviousFocus\",document.activeElement),d=function(a){var b=j.closeByDocument?c(a.target).hasClass(\"ngdialog-overlay\"):!1,d=c(a.target).hasClass(\"ngdialog-close\");(b||d)&&B.close(F.attr(\"id\"),d?\"$closeButton\":\"$document\")},\"undefined\"!=typeof w.Hammer){var s=E.hammerTime=w.Hammer(F[0]);s.on(\"tap\",d)}else F.bind(\"click\",d);return n+=1,B}),{id:C,closePromise:D.promise,close:function(a){A.closeDialog(F,a)}}},openConfirm:function(b){var d=s.defer(),e={closeByEscape:!1,closeByDocument:!1};a.extend(e,b),e.scope=a.isObject(e.scope)?e.scope.$new():u.$new(),e.scope.confirm=function(a){d.resolve(a);var b=c(document.getElementById(f.id));A.performCloseDialog(b,a)};var f=B.open(e);return f.closePromise.then(function(a){return a?d.reject(a.value):d.reject()}),d.promise},isOpen:function(a){var b=c(document.getElementById(a));return b.length>0},close:function(a,b){var d=c(document.getElementById(a));if(d.length)A.closeDialog(d,b);else if(\"$escape\"===a){var e=l[l.length-1];d=c(document.getElementById(e)),d.data(\"$ngDialogOptions\").closeByEscape&&A.closeDialog(d,\"$escape\")}else B.closeAll(b);return B},closeAll:function(a){for(var b=document.querySelectorAll(\".ngdialog\"),d=b.length-1;d>=0;d--){var e=b[d];A.closeDialog(c(e),a)}},getOpenDialogs:function(){return l},getDefaults:function(){return b}};return a.forEach([\"html\",\"body\"],function(a){if(z[a]=p.find(a),j[a]){var b=A.getRouterLocationEventName();u.$on(b,function(){z[a]=p.find(a)})}}),B}]}),b.directive(\"ngDialog\",[\"ngDialog\",function(b){return{restrict:\"A\",scope:{ngDialogScope:\"=\"},link:function(c,d,e){d.on(\"click\",function(d){d.preventDefault();var f=a.isDefined(c.ngDialogScope)?c.ngDialogScope:\"noScope\";a.isDefined(e.ngDialogClosePrevious)&&b.close(e.ngDialogClosePrevious);var g=b.getDefaults();b.open({template:e.ngDialog,className:e.ngDialogClass||g.className,controller:e.ngDialogController,controllerAs:e.ngDialogControllerAs,bindToController:e.ngDialogBindToController,scope:f,data:e.ngDialogData,showClose:\"false\"===e.ngDialogShowClose?!1:\"true\"===e.ngDialogShowClose?!0:g.showClose,closeByDocument:\"false\"===e.ngDialogCloseByDocument?!1:\"true\"===e.ngDialogCloseByDocument?!0:g.closeByDocument,closeByEscape:\"false\"===e.ngDialogCloseByEscape?!1:\"true\"===e.ngDialogCloseByEscape?!0:g.closeByEscape,overlay:\"false\"===e.ngDialogOverlay?!1:\"true\"===e.ngDialogOverlay?!0:g.overlay,preCloseCallback:e.ngDialogPreCloseCallback||g.preCloseCallback})})}}}]),b});"
+      },
+      "pattern_matched": "log[_-]?disable",
+      "raw_content": "!function(a,b){\"undefined\"!=typeof module&&module.exports?\"undefined\"==typeof angular?(b(require(\"angular\")),module.exports=\"ngDialog\"):(b(angular),module.exports=\"ngDialog\"):\"function\"==typeof define&&define.amd?define([\"ng-dialog\"],function(){b(a.angular)}):b(a.angular)}(this,function(a){\"use strict\";var b=a.module(\"ngDialog\",[]),c=a.element,d=a.isDefined,e=(document.body||document.documentElement).style,f=d(e.animation)||d(e.WebkitAnimation)||d(e.MozAnimation)||d(e.MsAnimation)||d(e.OAnimation),g=\"animationend webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend\",h=\"a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]\",i=\"ngdialog-disabled-animation\",j={html:!1,body:!1},k={},l=[],m=!1;return b.provider(\"ngDialog\",function(){var b=this.defaults={className:\"ngdialog-theme-default\",disableAnimation:!1,plain:!1,showClose:!0,closeByDocument:!0,closeByEscape:!",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:03.849157"
+    },
+    {
+      "id": "f813aa93",
+      "category": "HARDCODED_CREDS",
+      "title": "ログイン可能なアカウントを検出",
+      "description": "7個のシェルアクセス可能なアカウントを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/passwd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "accounts": [
+          {
+            "username": "root",
+            "uid": "0",
+            "gid": "0",
+            "home": "/root",
+            "shell": "/bin/ash",
+            "has_shell": true
+          },
+          {
+            "username": "daemon",
+            "uid": "1",
+            "gid": "1",
+            "home": "/var",
+            "shell": "/bin/false",
+            "has_shell": false
+          },
+          {
+            "username": "ftp",
+            "uid": "55",
+            "gid": "55",
+            "home": "/home/ftp",
+            "shell": "/bin/false",
+            "has_shell": false
+          },
+          {
+            "username": "network",
+            "uid": "101",
+            "gid": "101",
+            "home": "/var",
+            "shell": "/bin/false",
+            "has_shell": false
+          },
+          {
+            "username": "nobody",
+            "uid": "65534",
+            "gid": "65534",
+            "home": "/var",
+            "shell": "/bin/false",
+            "has_shell": false
+          },
+          {
+            "username": "admin",
+            "uid": "1000",
+            "gid": "0",
+            "home": "/var",
+            "shell": "/bin/false",
+            "has_shell": false
+          },
+          {
+            "username": "guest",
+            "uid": "2000",
+            "gid": "65534",
+            "home": "/var",
+            "shell": "/bin/false",
+            "has_shell": false
+          }
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.886904"
+    },
+    {
+      "id": "830aab12",
+      "category": "HARDCODED_CREDS",
+      "title": "ログイン可能なアカウントを検出",
+      "description": "37個のシェルアクセス可能なアカウントを検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/usr/bin/passwd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "accounts": [
+          {
+            "username": "\u0016\u0003\u0000\u0006\u0000@!<\u0003\u0000G\u0000@!d\u0006\u0000 #d\u0006\u0000<\u0002 \u0010!\u00008\u00004\u00000\u0000,\u0000(\u0000$\u0000 \u0000\u001c\u0000\u0018\u0003\u0000\b'\u0000@<\u0002\u0000G'<\u0003\u0000G\u0000\u001c\u00000\u0000%\u0000,\u0000(\u0000!\u0000$\u0000!\u0000 \u00004\u0000\u0018Q\u0005Hc\u0005P\"\u0000\b$r\u0000 $u\u0000P\u0000\u0000\u0012\u0000\u0000\u000f\u0000\u0000\u0000\u0000\u0003\u0000\u0004\u0002\u0018$\u0014t\u0000\t\u0000\u0000\u0000\u0000#\u0000\f\u0014C\u0000\u0003\u0000\u0000\u0000\u0000\f\u0010~8\u0000\u0000\u0000\u0000\u0003\u0000\b$B\u0000\u0004C\b\u0010}\u0010\u0000\u0000&R\u0000\u0004\u0002U\u0018+\u0014`\u0000\u0000\u0000\u0000#\u0000\f\u0014C\u0000\u0003\u0000\u0000\u0000\u0000\f\u0010~8\u0000\u0000\u0000\u0000\u0012`\u0000\u0002\u0000\u0000\u0000\u0000b\u0000\u0000@\u0000\u0000$B\u0000\u0004$\u0000\b\u00004\u00000\u0000,\u0000D #\u0000(\u0000$\u0000 \u0000\u001c\u0000\u0018\b\u0010v'\u00008'\u00008\u0000!\u0000 !\u0000D\u0000(!\u0000<'\u0000 \u00000\u0000@\u0002@!\f\u0010i\u00004<\u0007\u0000B\u0000 $\u0006\u0000\u0004$$\u0000@ !\u0000(#\u0000@!\f\u0011H\u0000\u0005(B\u0000\u0000\u0010@\u0000\u0003<\u0002\u0000G<\u0013\u0000F&s\u0007<\u0014\u0000FB\u0005L&6\u0000(\u0000 \u0002\u0002\u0010+\u0010@\u0000\u0018\u0000D\u0004\u0000\u0000\f\u0011\u0014$\u0005\u0000=\u0000(\u0000@!$b\u0000$#\u0000\u0000\u0010`\u0000\u0004\u0000\u0000\u0000\u0000&1\u0000\u0001\f\u0010|\u0002  !\u0007\u0000\u0000\u0002 !\u0000\u0014\u0002@(!\u0002`0!&\u0010\u0000\u0004\u0000\u0010\f\u0010n\u0002'8#\b\u0010Ǐ\u0000 \u0000@\u0000<\u00008\u00004\u00000\u0003\u0000\b'\u0000H'ȯ\u00000\u0000,$\u0014\u0000($\u0013\u0000n\u0000$\u0000!\u0000 $\u0011\u0000\u0002\u0000\u001c<\u0010\u0000F\u00004\u0000\u0000&\u00106ĐC\u0000\u0000$\u0002\u0000\u00018c\u0000r\u0000C\u000b\u0000\u0011'\f\u0010v\u0015\u0002\u0000 !\u0010@\u0000\u0007\u0000\u0000\u0000\u0000\u0014S\u0000\u0003$\u0003\u0000p\b\u0010\u0002!\u0010C\u0000(\u0000\u0000\u0000\u0000<\u0002\u0000GS\u0006p\u0000\u0000\u0012\u0000\u0000#\u0002$\b\u0010\u001e$\u0005\u0000=\f\u0010i\u0002\u0000 !\u0002\u0000(!\f\u0010j\f\u0000@ !B\u0000\u0000\u0010@\u0000\u000f\u0000\u0000\u0000\u0000C\u0000\u0004\u0002#\u0018%\u0002\u0018$C\u0000\u0004&s\u0000\u0004p\u0000\u0000\u0012\u0000\u0000\u0016\u00004$\u0005\u0000=\f\u0011\u0002\u0000 !\u0010@\u0000@!$R\u0000\u0001\u0002\u0000 !\u0002@(!\f\u0010x\u0002 0!\u0002\u0000 !\u0002@(!\f\u0010x\u00020!\b\u0010\u001a&s\u0000\u0004D\u0000\u0000\u0000\u00000!\f\u0010\u0002 (!\u00004\u0000\u0000\u0010!\u00000\u0000,\u0000(\u0000$\u0000 \u0000\u001c\u0003\u0000\b'\u00008'ȯ\u0000$\u00004\u00000\u0000,\u0000(\u0000 \u0000\u001c\u0000\u0018\u0000\u0000\u0012 \u0000L\u0000!$\u0004\u0000",
+            "uid": "P\u0006\u0002\u0000\u0000\u0010@\u0000\u0005\u0000\u0000\u0000\u0000\u0010C\u0000\u0003\u0000\u0000\u0000\u0000\b\u0010y&\u0010\u0000\u0001\u0003\u0000\u0000$\u0002\u0000",
+            "gid": "\u0014b\u0000\u0003&\u0010\u0000\u0001\b\u0010p\u0000\u0000`\u0000\u0000\u00004\u0002 !\u00000\u0000,\u0000(\u0000$\u0000 \u0000\u001c\u0000\u0018\b\u0010v'\u00008\u00004\u0000\u0000\u0010!\u00000\u0000,\u0000(\u0000$\u0000 \u0000\u001c\u0000\u0018\u0003\u0000\b'\u00008'(\u0000\u0003\u0000L\u0000H\u0000D\u0000@\u0000<\u00008\u00004\u00000\u0010@\u0000\u0004\u0000,<\u0004\u0000F\f\u0010u\u0004$6$\u0002\u0000\u0003\u0014\u0000\u0006<\u0003\u0000Gb\u0005PD\u0000\u0000U\u0000\u0010\b\u0010$\u0000\u0001b\u0005P$\u0000\f$F\u0000\u0004\u0000 *\u0010\u0000\u0004$\u0004\u0000\u0001D\u0000\u0004$\u0004D\u0000\bt\u0005P\u0000\u0004\u0000\u0004\u0018@\u0000\u0000\b\u0000\u0002$\u0003\u0000\u0001&1\u0010C\u0000\u000f\u0002!\u0000\b\u0006\u0000\u0000\f\u0000\u0000\u0000\u00003\f\u0011\u0002` !\u0000P\u0010*\u0014@\u0000\u0006\u0002p\u0018!\u0010`\u0000\u0004\u0000\u0000\u0000\u0000b\u0000\u0000\u0014@\u0000\u000f\u0000\u0000\u0000\u0000\"\u0000\u0000\u0010@\u0000$\u0003\u0000-D\u0000\u0000\u0014\u0000\u0000\u0000\u0000\u0000E\u0000\u0001\u0010\u0000$C\u0000\u0001\u0014\u0000\u0004&1\u0000\u0004B\u0000\u0002\u0010@\u0000\u0000\u0000\u0000\u0000p\u0000\u0000$s\u0000\u0001$\u0005\u0000",
+            "home": "\u0014b\u0000\t<\u0012\u0000F&D6죰\u0000\u0018'\u0000\u0018\u0000\u0019\f\u0010yS\u0000\u00000!\b\u0010\u0002\u0000@!<\u0002\u0000G<\u0005\u0000F\u0002\u00000!D\u0005\f\u0011`$6&D6\f\u0010x\u0000\u0000!\b\u0010",
+            "shell": "$\u0010\u0000?D\u0000\u0001$B\u0000\u0001\u0000 &,\u0000\u0001\b\u0010\u0000D\u0010!D\u0000\u0001$\u0002\u0000",
+            "has_shell": false
+          },
+          {
+            "username": "\u0012\u0000\u0005$\u0003\u0014^\u0000\u000b&\u0000\u0005\b\u0010\b\u0002(!\u0014C\u0000\u0007<\u0004\u0000F\u0000\u0000\u0002\u0000(!$k\u0002\u00000!\f\u0010\u0011\u001b\u0002\u00008!$\u0005\u0000\u0003\f\u0010\u0013~\u0000@ !\u0012\u0000\u0004*~\u0000\u0002\f\u0010\u0014n\u0002 !*~\u0000\u0002\u0013\u0000\f<\u0016\u0000G\u0016`\u0000\u0004\u0002\u0000(!<\u0004\u0000F\f\u0011$l\u0010\u0001X\u0010@\u0000\u0003<\u0004\u0000F\f\u0011p$l <\u0016\u0000G\u0000\u0000!\u0000\u0000!\u00058\u0000\u0000!\u0001\\'\u0001H$\u0004\u0000\u0003\f\u0011px$\u0006\u0000\u0004<\u0002PK\u0001H$C\u0001\u0002\u0010\u00016$B\u0003\u0004\u0010\u0000\u0003<\u0004\u0000F\b\u0010)$ld'\u0001\u0018$\u0004\u0000\u0003\f\u0011px$\u0006\u0000\u001a\u0001\u0018|C",
+            "uid": "\u0000\u0000\u0002\u0012\u0000\u0000(%\u0001\u001e0|C",
+            "gid": "\u0000\u0001\u001c\u0000\u0002\u0012\u0000\u0000b\u0010%\u0001\u001e\u0001 |C",
+            "home": "\u0000\u0000\u0002\u0012\u0000\u0002%2\u0001.\u00010|C",
+            "shell": "\u0000\u0000\u0002\u0012\u0000\u0000b\u0010%\u000100\u0010@\u0000\u0003<\u0004\u0000F\b\u0010)$l|\u0001\u001a0B\t\u0000\u0010@\u0000\u0004\u0000\u0000\u0000\u0000<\u0004\u0000F\b\u0010U$l\f\u0011@\u0002\u0000 !\f\u0010\u0012&\u0000\u0001$\u0004\u0000\u0003\u0001.\u0000@(!\f\u0011px\u0000@!\u0000\u0000 !\f\u0010p\u00010\u0002\u0000(!\f\u0010Ï\u0001L\u0014@\u0000ӏ\u0001P\u0014\u0000\u001d\u0001X\u0010@\u0000!\u0001 \u0001\u001e\u0001*\u0000\u0007<\u0000\u00008%\u0000\u0007\u001eB\u0001-$\u0002\u0000d\u0000\u001c$c\u0007|\u001d@\u0000@\u0001\u0000b\u0000\u001b|\"\u0000\u0014|)@|$\u0000\u0000\u0018\u0000\u0000 \u0010\u0000\u0010<\u0004\u0000F\f\u0011$l\u0001*\u0001-\b\u0010h\u0002!\f\u0010\u0002\u0000(!\u0010@\u0000\u0001X\b\u0010Ә\u0000\u0000\u0000\u0000$\u0002\u0000\u0001\u0012B\u0000v$\u0005\u0000/\f\u0010\u0010\u0002\u0000 !\u0010@\u0000I<\u0017\u0000G'\u0000(\f\u0011\u0002\u0000 !$\u0003\u0014C\u0000\u0014\u0001\\C\u0000\u0000$\u0002\u0000\u0002\u0014b\u0000I\u0000\u0000\u0000\u0000\u0016`\u0000\u0004<\u0004\u0000F\u0002\u0000(!\f\u0011$l\f\u0010\\\u0002\u0000 !$\u0005\u0001\u0000\u00000!\f\u0011gK\u0002\u0000 !\u0010@\u0000<\u0004\u0000F\b\u0010U$k܏\u0000@$\u0002@\u00000c\u0000\u0010b\u0000<\u0004\u0000F\b\u0010($l$\u0002\u0000\u0001\u0012\"\u0000\u0000@4\u0002\u00000c\u0000\u0014b\u0000?$\u0002\u0000\u0002\u0012\"\u0000C<\u0004\u0000F\u0002\u0000(!\f\u0011$m\u0014'\u0000Ȏ\u0005\f\u0011$\u0005\u0000P\u0010@\u0000%\u0000$\u0002\u0000n\u0010\u0000s,\u0000o\u0014@\u0000#$\u0002\u0000r\u0014\u0000(<\u0004\u0000F\f\u0011$m'\u0000Ȏ\u0005\f\u0011$\u0005\u0000P\u0010@\u0000\u0016\u0000\u0000\u0000\u0000\f\u0011@\u0002\u0000 !\f\u0010\u0012'\u0000\u0000@ !\f\u0011Ma\u0000@!'\u0000(\f\u0011\u0002\u0000 !$\u0003\u0014Cӎ\u00058C\u0000\u0000$\u0002\u0000\u0002\u0010b\u0000\u001a\u0000\u0000\u0000\u0000<\u0004\u0000F\u0002\u0000(!\f\u0010\u0016h$(<\u0004\u0000F\f\u0010\u0016h$mH$\u0002\u0000A\u0010\u0000\u000f$\u0002\u0000N\u0014\u0000P<\u0004\u0000F\b\u0010h$\u0011\u0000\u0001$\u0002\u0000y\u0010\u0000\t<\u0004\u0000F\b\u0010n\u0000\u0000\u0000\u0000<\u0004\u0000F$m\\\u0002\u0000(!\f\u0010\u0011\u001b\u0000\u0000\u0000\u0000$\u0011\u0000\u0002\f\u0010\\\u0002\u0000 !$\u0005\u0003\u0001\f\u0010\u00130\u0002\u0000 !\u0000@!\u0016`\u0000\u0004\u0002\u0000(!<\u0004\u0000F\f\u0011$m\u0001\u001c\u0014@\u0000\t\u0001*\u0001-\u0010\u0000%$\u0004\u0000\u0003\u0000\u00000!\f\u0010\u0016\u000e\u0002@(!\b\u0010a\u0000\u0000\u0000\u0000\u0001&$\u0002\u0000\u0003'\u00018\u0000\u00000!\u0001)\u0000\u0010\f\u0010ɯ\u0000\u0014\u0004A\u0000\u0003<\u0004\u0000F\b\u0010U$m\u0001\"\u0001@\u0001%\u0000\u0003\u0018'\u0010C\u0000\u0004<\u0004\u0000F$m\f\u0010\u0011\u001b\u0000\u0000\u0000\u0000\u0001*\u00018\u0014`\u0000\u0004\u0001-\u0001<\u0010b\u0000\u0005$\u0002\u0000\u0001<\u0003\u0000F\f\u0010\u0011&$dm$\u0002\u0000\u0001\u0012B\u0000\u000f\u0000\u0000\u0000\u0000\f\u0011,\u0002@ !\b\u0010l\u0000\u0000\u0000\u0000\u0001&\u0000\u0000 !\f\u0010p\u0001)\b\u00106&\u0000\u0001\f\u0011$m\b\u0010\t\u0000\u0000\u0000\u0000\b\u00106&\u0000\u0001\u0001X\u0010@\u0000\b\u0001\u0013\u0000\u0006<\u0004\u0000F\u0002(!$m\f\u0011\u00020!\u0001\u0000\u0000\u0010!\u0001\u0001|\u0001x\u0001t\u0001p\u0001l\u0001h\u0001d\u0001`\u0003\u0000\b'\u0001'8\u0000\u0000!\u0000į\u0000\u0000\u0000\u00000B\u0000\u0002\u0010@\u0000",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000D\u0019\u0000D\u0019\u0000@\u0000B\u0000D\u0000C\u0000B\u0000C\u001b\u0000C\u001b\u0000C(\u0000Ch\u0000C\u0000C\u001c\u0000C \u0000C@\u0000Dl\u0000C\u0000@z\u0000@`\u0000C\u0010\u0000C@\u0000C,\u0000C\u0004\u0000C<\u0000B\u0000CD\u0000C\u0000E\u0012x\u0000C\u0000\u0000Cɔ\u0000CD\u0000Bр\u0000E\u0012x\u0000E\t\u0000A\u0000CL\u0000@dD\u0000E\u0012x\u0000C\u001bP\u0000C9\u0000E\u001f0\u0000CD\u0000Bܬ\u0000C\u0000B\u0000\u0000C\u0000@X\u0000E,(\u0000@\u0000A\u001c\u0000A\u001c\u0000B\u0000@H\u0000Cl\u0000@\u0000B\u0000C\u0000@\u0000C\u001cD\u0000C\u001cD\u0000@\u0000C\u0000B\u0000CT\u0000B\u0000B\u0000C4\u0000B\u0000B\u0000C\u0000D+,\u0000C\u000b\u001c\u0000C\u0000@\u0000@H\u0000@h\u0000C\u0000@\u0000@lL\u0000A@\u0000A\u0000@\u0000@\u0000C\u0010d\u0000E\u001f0\u0000C\u001c\u0000A\u0000C\u0000C\u0000E\u001f0\u0000Ch\u0000C\u0000C\u0000\u0000@\u0000A\b\u0000D4\u0000C\u0000B\u0000D\u0002\u0000D\u0003\u0000D-\u0000@ \u0000C\u0011\u0000D\u0005\u0000AD\u0000D\u0007\u001c\u0000CFl\u0000@ \u0000D\u000e8\u0000A\u000e\\\u0000A\u0018\u0004\u0000D\u0019\u0000A \u0000@\\\u0000A\u0000D\u001b\u0014\u0000D T\u0000A&\u0018\u0000D\"\u0000A^ \u0000C\u0013\u0000D#\u0000\u0000D$\u0014\u0000C\u001cD\u0000CJ0\u0000A\\\u0000D&<\u0000A1\u0000D|\u0000@\u001c\u0000D&x\u0000A",
+            "uid": " I/O error\u0000\u0000\u0000setgid\u0000\u0000setuid\u0000\u0000chdir(%s)\u0000\u0000\u0000can't change root directory to %s\u0000\u0000\u0000INET\u0000\u0000\u0000\u0000INET6\u0000\u0000\u0000NETLINK\u0000PACKET\u0000\u0000socket(AF_%s,%d,%d)\u0000bind\u0000\u0000\u0000\u0000listen\u0000\u0000sendto\u0000\u0000can't stat '%s'\u0000SELinux support is disabled\u0000/dev/urandom\u0000\u0000\u0000\u0000vfork\u0000\u0000\u0000read error\u0000\u0000write error\u0000short read\u0000\u0000%u",
+            "gid": "%u%c\u0000%u.%u-%u",
+            "home": "%u%c\u0000\u0000\u0000\u0000%u-%u-%u %u",
+            "shell": "%u%c\u0000\u0000\u0000\u0000%2u%2u%2u%2u%2u%c\u0000\u0000\u0000%4u%2u%2u%2u%2u%c\u0000\u0000\u0000tcsetattr\u0000\u0000\u0000/bin/login\u0000\u0000/etc/issue\u0000\u0000-2",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000Old password",
+            "uid": " \u0000\u0000Retype password",
+            "gid": " \u0000\u0000\u0000Passwords don't match\u0000\u0000\u0000password for %s is unchanged\u0000\u0000\u0000\u0000!%s\u0000can't update password file %s\u0000\u0000\u0000Password for %s changed by %s\u0000\u0000\u0000password for %s is already %slocked\u0000Iuser %s",
+            "home": " too many lines\u0000\u0000\u0000\u0000cron.update\u0000chdir(%s)\u0000\u0000Ican't get uid for %s\u0000\u0000\u0000%s=%s\u0000\u0000\u0000USER\u0000\u0000\u0000\u0000HOME\u0000\u0000\u0000\u0000Ichdir(%s)\u0000\u0000/var/spool/cron\u0000\u0014can't execute '%s' for user %s\u0000\u0014can't vfork\u0000\u0000\u0000\u0000/etc/crontabs\u0000\u0000\u0000f-b",
+            "shell": "b-f",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000<stdin>\u0000%40s %c %o %40s %40s %u %u %u %u %u\u0000invalid line %d",
+            "uid": " can't chown %s\u0000line %d",
+            "gid": " can't chmod %s\u0000line %d",
+            "home": " unsupported file type %c\u0000\u0000\u0000line %d",
+            "shell": " can't create node %s\u0000\u0000\u0000%s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000Uni\u0000Broad\u0000\u0000\u0000eth0\u0000\u0000\u0000\u0000interface %s %%s\u0000\u0000\u0000\u0000=1",
+            "uid": "AU",
+            "gid": "c+\u0000DUAqfbc",
+            "home": "I",
+            "shell": "s",
+            "has_shell": false
+          },
+          {
+            "username": "C\u0000\u0010\u0000F\u000b\b\u0018\u0000\u0010\u0000F\u000b\u0014\u001c\u0000\u0010\u0000F\u000b \u001a\u0000\u0010\u0000F\u000b,$\u0000\u0010\u0000F\u000b\b\u0018\u0000\u0010\u0000F\u000b8\u0016\u0000\u0010\u0000F\u000b@6\u0000\u0010\u0000F\u000b8\u0016\u0000\u0010%02X-\u0000\u0000\u0000[NONE SET]\u0000\u0000%02X",
+            "uid": "%02X",
+            "gid": "%02X",
+            "home": "%02X\u0000\u0000\u0000error",
+            "shell": " no inet socket available\u0000SIOCGIFCONF\u0000/proc/net/dev\u0000\u0000\u0000compressed\u0000\u0000bytes\u0000\u0000\u0000Device not found\u0000\u0000\u0000\u0000%s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000/proc/net/if_inet6\u0000\u0000%s",
+            "uid": "%s",
+            "gid": "%s",
+            "home": "%s",
+            "shell": "%s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000          \u0000\u0000[NO FLAGS] \u0000 MTU",
+            "uid": "%d\u0000\u0000RX packets",
+            "gid": "%llu errors",
+            "home": "%lu overruns",
+            "shell": "%lu frame",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000Opening socket\u0000\u0000setsockopt()\u0000\u0000\u0000\u0000sendto()\u0000\u0000\u0000\u0000unix\u0000\u0000\u0000\u0000??\u0000\u0000UNKNOWN\u0000FREE\u0000\u0000\u0000\u0000CONNECTING\u0000\u0000CONNECTED\u0000\u0000\u0000DISCONNECTING\u0000\u0000\u0000LISTENING\u0000\u0000\u0000%*p",
+            "uid": "%s\u0000\u0000\u0000%s/cmdline\u0000\u0000fd\u0000\u0000socket",
+            "gid": "[\u0000\u0000\u0000\u0000[0000]",
+            "home": " bogus data on line %d\u0000\u0000\u0000%*d",
+            "shell": " %32[0-9A-Fa-f]",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000Destination Unreachable\u0000Packet too big\u0000\u0000Time Exceeded\u0000\u0000\u0000Parameter Problem\u0000\u0000\u0000Listener Reduction\u0000\u0000unknown ICMP type\u0000\u0000\u0000Listener Query\u0000\u0000Listener Report\u0000=1",
+            "uid": "v--q",
+            "gid": "c+",
+            "home": "w+",
+            "shell": "W+\u0000\u0000\u0000\u0000qvc",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000A\u0010\u0000A\u0011\b\u0000A\u0011X\u0000A\u00130\u0000A\u00130\u0000A\u0010/etc/issue.net\u0000\u0000f",
+            "uid": "Kip",
+            "gid": "b",
+            "home": "p",
+            "shell": "g--p",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000ftp_proxy\u0000\u0000\u0000http_proxy\u0000\u0000ht\u0000\u0000Wget\u0000\u0000\u0000\u0000-1",
+            "uid": "",
+            "gid": "\u0000\u0000csqO",
+            "home": "Y",
+            "shell": "U",
+            "has_shell": false
+          },
+          {
+            "username": "%s\u0000\u0000\u0000server returned error",
+            "uid": "busybox@\u0000\u0000USER \u0000\u0000\u0000PASS \u0000\u0000\u0000ftp login",
+            "gid": " %s\u0000\u0000\u0000TYPE I\u0000\u0000SIZE \u0000\u0000\u0000SIZE value is garbage\u0000\u0000\u0000PASV\u0000\u0000\u0000\u0000bad response to %s",
+            "home": " %s\u0000\u0000\u0000Sending discover...\u0000Sending select for %s...\u0000\u0000\u0000\u0000Sending decline...\u0000\u0000Sending release...\u0000\u0000Sending renew...\u0000\u0000\u0000\u0000Packet read error, ignoring\u0000Packet is too short, ignoring\u0000\u0000\u0000Oversized packet, ignoring\u0000\u0000Unrelated/bogus packet, ignoring\u0000\u0000\u0000\u0000Bad IP header checksum, ignoring\u0000\u0000\u0000\u0000Packet with bad UDP checksum received, ignoring\u0000Packet with bad magic, ignoring\u0000Got valid DHCP packet\u0000\u0000\u0000%s%u.%u.%u.%u\u0000\u0000\u0000none\u0000\u0000\u0000\u0000kernel\u0000\u0000Entering listen mode",
+            "shell": " %s\u0000\u0000\u0000\u0000Opening raw socket on ifindex %d\u0000\u0000\u0000\u0000Got raw socket fd %d\u0000\u0000\u0000\u0000Attached filter to raw socket fd %d\u0000Failed to set auxiliary packet data for socket fd %d\u0000\u0000\u0000\u0000Created raw socket\u0000\u0000action\u0000\u0000status\u0000\u0000ip\u0000\u0000mask\u0000\u0000\u0000\u0000gw\u0000\u0000dns1\u0000\u0000\u0000\u0000dns2\u0000\u0000\u0000\u0000ubus send %s '%s'\u0000\u0000\u0000smartip\u0000%ld\u0000%s=\u0000/%u \u0000\u0000\u0000\u0000%u \u0000%s%04X\u0000\u0000interface=%s\u0000\u0000\u0000\u0000ip=\u0000mask=%d\u0000siaddr=\u0000boot_file=%.128s\u0000\u0000\u0000\u0000sname=%.64s\u0000opt%u=\u0000\u0000Executing %s %s\u0000Unicasting a release of %s to %s\u0000\u0000\u0000\u0000deconfig\u0000\u0000\u0000\u0000Entering released state\u0000bound\u0000\u0000\u0000renew\u0000\u0000\u0000/usr/share/udhcpc/default.script\u0000\u0000\u0000\u0000udhcp 1.19.4\u0000\u0000\u0000\u0000O",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000$@\u0001\u0011\u0000\u0000 hlen %x xid %x ciaddr %x yiaddr %x siaddr %x giaddr %x\u0000 chaddr %s\u0000\u0000Received a packet\u0000\u0000\u0000MSFT 98\u0000Broken client (%s), forcing broadcast replies\u0000\u0000\u0000bind(%s)\u0000\u0000\u0000\u0000socket(%s)\u0000\u0000connect\u0000write\u0000\u0000\u0000UDP\u0000can't send signal\u0000\u0000\u0000is interface %s up and configured?\u0000\u0000IP %s\u0000\u0000\u0000SIOCGIFINDEX\u0000\u0000\u0000\u0000Adapter index %d\u0000\u0000\u0000\u0000SIOCGIFHWADDR\u0000\u0000\u0000MAC %02x",
+            "uid": "%02x",
+            "gid": "%02x",
+            "home": "%02x\u0000\u0000\u0000Opening listen socket on *",
+            "shell": "%d %s\u0000\u0000\u0000\u0000SO_BROADCAST\u0000\u0000\u0000\u0000No a\u0000\u0000\u0000\u0000can't enable bcast on raw socket\u0000\u0000\u0000\u0000%srp reply received for this address\u0000\u0000\u0000\u0000%s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000s+",
+            "uid": "P",
+            "gid": "\u0000\u0000-",
+            "home": " '%s' must be of the form name=value\u0000\u0000error",
+            "shell": " malformed setting '%s'\u0000\u0000\u0000error",
+            "has_shell": false
+          },
+          {
+            "username": "%5u%6u %-8.8s %s%s%4u%%%4u%% \u0000\u0000stat\u0000\u0000\u0000\u0000can't read /proc/stat\u0000\u0000\u0000d",
+            "uid": "b\u0000\u0000\u0000no process info in /proc\u0000\u0000\u0000\u0000cpu %llu %llu %llu %llu %llu %llu %llu %llu\u0000 %02u",
+            "gid": "%02u",
+            "home": "%02u\u0000\u0000\u0000\u0000%u min\u0000\u0000,  load average",
+            "shell": " %u.%02u, %u.%02u, %u.%02u",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000invalid file descriptor\u0000invalid timeout\u0000invalid count\u0000\u0000\u0000read",
+            "uid": " not a valid identifier\u0000\u0000REPLY\u0000\u0000\u0000-%c",
+            "gid": " %-30s \u0000error setting limit\u0000file size (blocks)\u0000\u0000cpu time (seconds)\u0000\u0000data seg size (kb)\u0000\u0000stack size (kb)\u0000core file size (blocks)\u0000resident set size (kb)\u0000\u0000locked memory (kb)\u0000\u0000processes\u0000\u0000\u0000file descriptors\u0000\u0000\u0000\u0000address space (kb)\u0000\u0000scheduling priority\u0000real-time priority\u0000\u0000-HSaf",
+            "home": "t",
+            "shell": "",
+            "has_shell": true
+          },
+          {
+            "username": "\u0000e\u0000\u0000FG\u001c\u000e\u0000r\u0000\u0000FG0c",
+            "uid": " %s\u0000\u0000\u0000klogctl(2) error\u0000\u0000\u0000\u0000klogd",
+            "gid": " exiting\u0000\u0000p",
+            "home": "\u0000\u0000\u0000unknown %s name",
+            "shell": " %s\u0000facility\u0000\u0000\u0000\u0000priority\u0000\u0000\u0000\u0000auth\u0000\u0000\u0000\u0000authpriv\u0000\u0000\u0000\u0000cron\u0000\u0000\u0000\u0000daemon\u0000\u0000kern\u0000\u0000\u0000\u0000lpr\u0000mail\u0000\u0000\u0000\u0000mark\u0000\u0000\u0000\u0000news\u0000\u0000\u0000\u0000security\u0000\u0000\u0000\u0000syslog\u0000\u0000user\u0000\u0000\u0000\u0000uucp\u0000\u0000\u0000\u0000local0\u0000\u0000local1\u0000\u0000local2\u0000\u0000local3\u0000\u0000local4\u0000\u0000local5\u0000\u0000local6\u0000\u0000local7\u0000\u0000alert\u0000\u0000\u0000crit\u0000\u0000\u0000\u0000debug\u0000\u0000\u0000emerg\u0000\u0000\u0000info\u0000\u0000\u0000\u0000notice\u0000\u0000panic\u0000\u0000\u0000warn\u0000\u0000\u0000\u0000warning\u0000\u0000FHH\u0000\u0000\u0000 \u0000FHP\u0000\u0000\u0000P\u0000FH\\\u0000\u0000\u0000H\u0000FHd\u0000\u0000\u0000\u0018\u0000F\"\f\u0000\u0000\u0000X\u0000FHl\u0000\u0000\u0000\u0000\u0000FHt\u0000\u0000\u00000\u0000FHx\u0000\u0000\u0000\u0010\u0000FH\u0000\u0000\u0000\u0000FH\u0000\u0000\u00008\u0000FH\u0000\u0000\u0000 \u0000FH\u0000\u0000\u0000(\u0000FH\u0000\u0000\u0000\b\u0000FH\u0000\u0000\u0000@\u0000FH\u0000\u0000\u0000\u0000FH\u0000\u0000\u0000\u0000FH\u0000\u0000\u0000\u0000FH\u0000\u0000\u0000\u0000FH\u0000\u0000\u0000\u0000FH\u0000\u0000\u0000\u0000FH\u0000\u0000\u0000\u0000FH\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000FH\u0000\u0000\u0000\u0001\u0000FH\u0000\u0000\u0000\u0002\u0000FI\u0004\u0000\u0000\u0000\u0007\u0000FI\f\u0000\u0000\u0000\u0000\u0000F}T\u0000\u0000\u0000\u0003\u0000Fo(\u0000\u0000\u0000\u0003\u0000FI\u0014\u0000\u0000\u0000\u0006\u0000F&\\\u0000\u0000\u0000\u0010\u0000FI\u001c\u0000\u0000\u0000\u0005\u0000FI$\u0000\u0000\u0000\u0000\u0000FI,\u0000\u0000\u0000\u0004\u0000FI4\u0000\u0000\u0000\u0004\u0000\u0000\u0000\u0000s+",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000No free sectors available\u0000\u0000\u0000Last %s or +size or +sizeM or +sizeK\u0000\u0000\u0000\u0000l   logical (5 or over)\u0000e   extended\u0000\u0000\u0000\u0000b+",
+            "uid": "H+",
+            "gid": "S+\u0000b",
+            "home": "H",
+            "shell": "lS",
+            "has_shell": false
+          },
+          {
+            "username": "\"\u0000\"%08.8_ax  \" 8/1 \"%02x \" \"  \" 8/1 \"%02x \" \u0000\u0000\"  |\" 16/1 \"%_p\" \"|\\n\"\u0000\u0000\"%07.7_ax \" 8/2 \"%04x \" \"\\n\"\u0000\u0000\u0000\u0000\"%07.7_ax \" 16/1 \"%03o \" \"\\n\"\u0000\u0000\u0000\"%07.7_ax \" 16/1 \"%3_c \" \"\\n\"\u0000\u0000\u0000\"%07.7_ax \" 8/2 \"  %05u \" \"\\n\"\u0000\u0000\"%07.7_ax \" 8/2 \" %06o \" \"\\n\"\u0000\u0000\u0000\"%07.7_ax \" 8/2 \"   %04x \" \"\\n\"\u0000b\u0000\u0000\u0000\u0000\u0000\u0002\u0000k\u0000\u0000\u0000\u0000\u0000\u0004\u0000m\u0000\u0000\u0000\u0000\u0010\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000F^\u0000F^\u0000F_\u0014\u0000F_4\u0000F_Tr--wst",
+            "uid": "s--wrt",
+            "gid": "t--rsw",
+            "home": "u--l\u0000\u0000\u0000lurswtf",
+            "shell": "\u0000\u0000\u0000\u0000settimeofday\u0000\u0000\u0000\u0000RTC_SET_TIME\u0000\u0000\u0000\u0000%s  0.000000 seconds",
+            "has_shell": false
+          },
+          {
+            "username": "\t%u\u0000\u0000\u0000-1",
+            "uid": "i+",
+            "gid": "I+",
+            "home": "b",
+            "shell": "f",
+            "has_shell": false
+          },
+          {
+            "username": "%u inodes per group\u0000\u0000lost+found\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0003\u0000\u0000\u0000\u0005\u0000\u0000\u0000\u0007\u0000\u0000\u0000\t\u0000\u0000\u0000\u0019\u0000\u0000\u0000\u001b\u0000\u0000\u00001\u0000\u0000\u0000Q\u0000\u0000\u0000}\u0000\u0000\u0000\u0000\u0000\u0001W\u0000\u0000\u0002q\u0000\u0000\u0002\u0000\u0000\b\u0000\u0000\ta\u0000\u0000\f5\u0000\u0000\u0019\u0000\u0000=\t\u0000\u0000A\u0000\u0000L\u0000\u0000\u0000\u00011-\u0000\u0001ˑ\u0000\u0002\u0000\u0005\u0000\b\u001b\u0000\f\u0000\u0018S\u0000\u001de\u0000Hy\u0000W\u0000\u0002\u0000k\u0002gG\u0002A\u0002\u000e\u0007\u000eJQ\u0010",
+            "uid": "cCf",
+            "gid": "F",
+            "home": "Ii",
+            "shell": "l",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000can't read '%s'\u0000swap\u0000\u0000\u0000\u0000can't find %s in %s\u0000/etc/filesystems\u0000\u0000/proc/filesystems\u0000loop\u0000defaults\u0000noauto\u0000sw\u0000swap\u0000_netdev\u0000nosuid\u0000suid\u0000dev\u0000nodev\u0000exec\u0000noexec\u0000sync\u0000dirsync\u0000async\u0000atime\u0000noatime\u0000diratime\u0000nodiratime\u0000mand\u0000nomand\u0000relatime\u0000norelatime\u0000loud\u0000rbind\u0000union\u0000bind\u0000move\u0000make-shared\u0000make-slave\u0000make-private\u0000make-unbindable\u0000make-rshared\u0000make-rslave\u0000make-rprivate\u0000make-runbindable\u0000make-union\u0000ro\u0000rw\u0000remount\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000@\u0000\u0000\u0000@\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0002\u0000\u0000\u0000\u0004\u0000\u0000\u0000\b\u0000\u0000\u0000\u0010\u0000\u0000\u0000\u0000\u0000\u0004\u0000\u0000\u0000\b\u0000\u0000\u0000\u0000@\u0000 \u0000\u0000\u0000\u0000P\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0010\u0000\u0000\u0000 \u0000\u0000\u0010\u0000\u0000\u0000\b\u0000\u0000\u0000\u0004\u0000\u0000\u0000\u0002\u0000\u0000\u0000\u0010@\u0000\u0000\b@\u0000\u0000\u0004@\u0000\u0000\u0002@\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0000\u0001\u0000\u0000\u0000 -2\u0000\u0000+c",
+            "uid": "i\u0000can't %sumount %s\u0000\u0000\u0000tgz\u0000error inflating\u0000invalid magic\u0000\u0000\u0000%s.%s\u0000\u0000\u0000%s",
+            "gid": " unknown suffix - ignored\u0000\u0000\u0000\u0000compressed data not read from terminal, use -f to force it\u0000\u0000cfvdtn\u0000\u0000cfvdt\u0000\u0000\u0000bz2\u0000lzma\u0000\u0000\u0000\u0000cfvdtq123456789n\u0000\u0000\u0000\u0000gz\u0000\u0000%0*llo\u0000\u0000ustar  \u0000././@LongLink\u0000\u0000\u0000gzip\u0000\u0000\u0000\u0000-f\u0000\u0000can't stat tar file\u0000error exit delayed from previous errors\u0000waitpid\u0000%s",
+            "home": " socket ignored\u0000\u0000%s",
+            "shell": " file is the archive; skipping\u0000\u0000\u0000--",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000.zip\u0000.ZIP\u0000\u0000can't remove old file %s\u0000\u0000\u0000\u0000can't stat old file\u0000%s not created",
+            "uid": " skipping header '%c'\u0000\u0000\u0000unknown typeflag",
+            "gid": " 0x%x\u0000\u0000invalid gzip magic\u0000\u0000%s %u/%u %9llu %4u-%02u-%02u %02u",
+            "home": "%02u %s\u0000\u0000 -> %s\u0000\u0000seek failure\u0000\u0000\u0000\u0000\u001b[H\u001b[J\u0000\u0000\u001bc\u001b(B\u001b[0m\u001b[J\u001b[?25h\u0000\u0000stty\u0000\u0000\u0000\u0000sane\u0000\u0000\u0000\u0000\u0000Fp\u0000Fp\u0000\u0000\u0000\u0000invalid mode '%s'\u0000\u0000\u0000-R\u0000\u0000Rh\u0000\u0000-i\u0000\u0000-2",
+            "shell": "l--s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000h-km",
+            "uid": "m-hk",
+            "gid": "H-L",
+            "home": "s-d",
+            "shell": "d-s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000 groups=\u0000\u0000\u0000\u0000?1",
+            "uid": "g--u",
+            "gid": "G--u",
+            "home": "g--G",
+            "shell": "G--g",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000el",
+            "uid": "S-t",
+            "gid": "H-L",
+            "home": "C-xl",
+            "shell": "x-Cl",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000m",
+            "uid": "f-in",
+            "gid": "i-fn",
+            "home": " overwrite '%s'? \u0000\u0000\u0000\u0000can't rename '%s'\u0000\u0000\u0000non-\u0000\u0000\u0000\u0000can't remove '%s'\u0000\u0000\u0000setpriority(%d)\u0000.*\u0000\u0000usage",
+            "shell": " printf FORMAT [ARGUMENT...]\u0000\u0000-+ #\u0000\u0000\u0000\u0000%s",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0018\u0001\u0018\u0001\u0019\u0001\u001a\u0001\u001b\u0001\u001c\u0001\u001d\u0001\u001e\u0001\u001f\u0001 \u0001!\u0001\u0011\u0001\u0012\u0001\u0013\u0001\"\u0002#\u0003$\u0003%\u0004&\u0004cfma\u0000\u0000\u0000\u0000+Ccds\u0000\u0000\u0000STRING2 cannot be empty\u0000GNU/Linux\u0000\u0000\u0000\u0000\u0000\u0000A\u0000\u0000\u0001\u0004\u0001\u0001\u0002\bf+",
+            "uid": "w+\u0000\u0000\u0000\u0000cduf",
+            "gid": "s",
+            "home": "\u0000\u0000\u0000%7lu \u0000\u0000\u0000 %9u\u0000\u0000\u0000\u0000lwmcL\u0000\u0000\u0000m",
+            "shell": "\u0000\u0000TMPDIR\u0000\u0000/tmp\u0000\u0000\u0000\u0000?1\u0000\u0000dqtp",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000/dev/stdin\u0000\u0000/dev/stdout\u0000/dev/stderr\u0000include\u0000v",
+            "uid": "f",
+            "gid": "",
+            "home": "v",
+            "shell": "f",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000no address after comma\u0000\u0000missing command\u0000bad option in substitution expression\u0000\u0000\u0000only a beginning address can be specified for edit commands\u0000command only uses one address\u0000\u0000\u0000unsupported command %c\u0000\u0000unterminated {\u0000\u0000no previous regexp\u0000\u0000can't find label for jump to '%s'\u0000\u0000\u0000--version\u0000\u0000\u0000This is not GNU sed version 4.0\u0000e",
+            "uid": "f",
+            "gid": "",
+            "home": "f",
+            "shell": "\u0000%sXXXXXX\u0000\u0000\u0000\u0000\u0000DP\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000Dh\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D$\u0000D\u0000Dp\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0004\u0000D\u0000D0\u0000D\u0000D\u0000D\u0000D8\u0000D\u0000D$\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D\u0014\u0000DT\u0000D\u0000D\u0000D\u0000D\u0000D\u0000D|\u0000DHsaicrw",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000No write since last change (",
+            "uid": "rewind! overrides)\u0000set\u0000all\u0000%sautoindent %sflash %signorecase %sshowmatch tabstop=%u\u0000\u0000\u0000\u0000autoindent \u0000ai\u0000\u0000flash \u0000\u0000fl\u0000\u0000ignorecase \u0000showmatch \u0000\u0000sm\u0000\u0000tabstop=\u0000\u0000\u0000\u00001.19.4 2024-12-06 18",
+            "gid": "27",
+            "home": "s expression missing delimiters\u0000\u0000\u0000\u0000search hit TOP, continuing at BOTTOM\u0000\u0000\u0000\u0000Pattern not found\u0000\u0000\u0000search hit BOTTOM, continuing at TOP\u0000\u0000\u0000\u0000Nothing in register %c\u0000\u0000()[]{}\u0000\u0000Write error",
+            "shell": " %s\u0000wW\u0000\u0000^0bBeEft%$ lh\b\u0000cdykjHL+-{}",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000^0bBh\b\u0000\u001b[999;999H\u001b[6n\u0000\u0000%d%c\u0000\u0000\u0000\u0000EXINIT\u0000\u0000hCRHc",
+            "uid": " %s\u0000\u0000\u0000\u0000c\u0000\u0000\u0000\u0000\u0000\u0000\u0001w\u0000\u0000\u0000\u0000\u0000\u0000\u0002\u0000\u0000\u0000\u0000\u0000\u0000\u0002\u0000b\u0000\u0000\u0000\u0000\u0000\u0002\u0000k\u0000\u0000\u0000\u0000\u0000\u0004\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000%i%c\u0000\u0000\u0000\u0000%s",
+            "gid": "\u0000H-h",
+            "home": "e",
+            "shell": "",
+            "has_shell": true
+          },
+          {
+            "username": "%-20.20s\u0000\u0000\u0000%4u%%\u0000\u0000\u0000 |%s|\u0000\u0000\u0000%6u%c\u0000\u0000\u0000  - stalled -\u0000\u0000\u0000 --",
+            "uid": "-- ETA\u0000\u0000\u0000%3u",
+            "gid": "%02u",
+            "home": " is a directory\u0000\u0000%s",
+            "shell": " descend into directory '%s'? \u0000\u0000\u0000can't close '%s'\u0000\u0000\u0000\u0000%s",
+            "has_shell": false
+          },
+          {
+            "username": "h<e8\u0005>\u0010bN*\u0015AR\b\u001bϱ4\u0016\b۴\u0002|L7Eu\u0002pד\u00003@\u001a\u0014f@mvo\u0000?]>\u001etz6l݌kNxm?\u0017rE8Pg@[\u0000[[\u0000arping\u0000ash\u0000awk\u0000basename\u0000bash\u0000bunzip2\u0000bzcat\u0000cat\u0000chgrp\u0000chmod\u0000chown\u0000chroot\u0000clear\u0000cmp\u0000cp\u0000crond\u0000crontab\u0000cut\u0000date\u0000dd\u0000df\u0000dirname\u0000dmesg\u0000du\u0000echo\u0000egrep\u0000env\u0000expr\u0000false\u0000fdisk\u0000fgrep\u0000find\u0000free\u0000fsync\u0000getty\u0000grep\u0000gunzip\u0000gzip\u0000halt\u0000head\u0000hexdump\u0000hostid\u0000hwclock\u0000id\u0000ifconfig\u0000init\u0000insmod\u0000kill\u0000killall\u0000klogd\u0000less\u0000ln\u0000lock\u0000logger\u0000ls\u0000lsmod\u0000lzcat\u0000lzma\u0000makedevs\u0000md5sum\u0000mdev\u0000mkdir\u0000mkdosfs\u0000mke2fs\u0000mkfifo\u0000mkfs.ext2\u0000mkfs.vfat\u0000mknod\u0000mktemp\u0000mount\u0000mv\u0000nc\u0000netmsg\u0000netstat\u0000nice\u0000nslookup\u0000passwd\u0000pgrep\u0000pidof\u0000ping\u0000ping6\u0000pivot_root\u0000poweroff\u0000printf\u0000ps\u0000pwd\u0000readlink\u0000reboot\u0000reset\u0000rm\u0000rmdir\u0000rmmod\u0000route\u0000sed\u0000seq\u0000sh\u0000sleep\u0000sort\u0000start-stop-daemon\u0000strings\u0000switch_root\u0000sync\u0000sysctl\u0000tail\u0000tar\u0000taskset\u0000tee\u0000telnet\u0000telnetd\u0000test\u0000tftp\u0000time\u0000top\u0000touch\u0000tr\u0000traceroute\u0000true\u0000udhcpc\u0000umount\u0000uname\u0000uniq\u0000unlzma\u0000unzip\u0000uptime\u0000usleep\u0000vconfig\u0000vi\u0000watchdog\u0000wc\u0000wget\u0000which\u0000xargs\u0000yes\u0000zcat\u0000\u0000PATH=/sbin",
+            "uid": "/bin",
+            "gid": "/usr/bin\u0000-/bin/sh\u0000/proc/self/exe\u00000123456789ABCDEF\u0000standard output\u0000standard input\u0000invalid argument '%s' to '%s'\u0000%s requires an argument\u0000you must be root\u0000permission denied (are you root?)\u0000can't create raw socket\u0000(unknown)\u0000invalid date '%s'\u0000out of memory\u0000BusyBox v1.19.4 (2024-12-06 18",
+            "home": "42 CST)\u0000I",
+            "shell": "LH",
+            "has_shell": false
+          },
+          {
+            "username": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0001\u0001\u0001\u0001\u0002\u0002\u0002\u0002\u0003\u0003\u0003\u0003\u0004\u0004\u0004\u0004\u0005\u0005\u0005\u0005\u0000cc only when operating on fields\u0000b",
+            "uid": "f",
+            "gid": "d",
+            "home": "c",
+            "shell": "qv\u0000color\u0000\u0002\u0000always\u0000yes\u0000force\u0000auto\u0000tty\u0000if-tty\u0000\u0000Cadil1gnsxQAkcetuSXrvFpRLHhT",
+            "has_shell": false
+          }
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.890090"
+    },
+    {
+      "id": "2e6c5d03",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: boot",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/boot",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.895506"
+    },
+    {
+      "id": "fe50b7cd",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: proftpd",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/proftpd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          "ftpd",
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.896941"
+    },
+    {
+      "id": "651bb868",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: uhttpd",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/uhttpd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.899467"
+    },
+    {
+      "id": "05a607b4",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: pptpd",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/pptpd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.900239"
+    },
+    {
+      "id": "1d28bc1b",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: samba",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/init.d/samba",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.905998"
+    },
+    {
+      "id": "e9f0dddd",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: S10boot",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S10boot",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.915846"
+    },
+    {
+      "id": "fa652e94",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: K98boot",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/K98boot",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.917503"
+    },
+    {
+      "id": "e9cdd7e4",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: S60pptpd",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S60pptpd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.919700"
+    },
+    {
+      "id": "245955ec",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: S71proftpd",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S71proftpd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          "ftpd",
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.922580"
+    },
+    {
+      "id": "8046815c",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: S60samba",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S60samba",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.929377"
+    },
+    {
+      "id": "50e3a3af",
+      "category": "HIDDEN_SERVICE",
+      "title": "init.dスクリプトに不審なコードを検出: S50uhttpd",
+      "description": "起動時に実行される不審なサービスを発見",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/etc/rc.d/S50uhttpd",
+        "line_number": null,
+        "context": null
+      },
+      "pattern_matched": null,
+      "raw_content": null,
+      "metadata": {
+        "suspicious_patterns": [
+          ">/dev/null\\s+2>&1"
+        ]
+      },
+      "timestamp": "2026-01-08T10:25:03.936492"
+    },
+    {
+      "id": "a6ac746a",
+      "category": "SUSPICIOUS_NETWORK",
+      "title": "不審なネットワーク設定",
+      "description": "不審なファイアウォール/ネットワーク設定を検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/opt/lantiq/etc/uci_to_ipsec_config.sh",
+        "line_number": 197,
+        "context": "\t\tiptables -I INPUT -s $remote_ip/32 -d $my_ip/32 -j ACCEPT"
+      },
+      "pattern_matched": "iptables\\s+-[AI].*ACCEPT",
+      "raw_content": "\t\tiptables -I INPUT -s $remote_ip/32 -d $my_ip/32 -j ACCEPT",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:04.454816"
+    },
+    {
+      "id": "2db4cbbf",
+      "category": "SUSPICIOUS_NETWORK",
+      "title": "不審なネットワーク設定",
+      "description": "不審なファイアウォール/ネットワーク設定を検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/data/menu.advanced.json",
+        "line_number": 37,
+        "context": "\t\t\t\"name\": \"nat-forwarding\","
+      },
+      "pattern_matched": "nat[_-]?forward",
+      "raw_content": "\t\t\t\"name\": \"nat-forwarding\",",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:05.903768"
+    },
+    {
+      "id": "04d7a173",
+      "category": "SUSPICIOUS_NETWORK",
+      "title": "不審なネットワーク設定",
+      "description": "不審なファイアウォール/ネットワーク設定を検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/frame/advanced.1733481622767.html",
+        "line_number": 326,
+        "context": "\t\"nat-forwarding\":{\t\t"
+      },
+      "pattern_matched": "nat[_-]?forward",
+      "raw_content": "\t\"nat-forwarding\":{\t\t",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:05.903785"
+    },
+    {
+      "id": "8c49171b",
+      "category": "SUSPICIOUS_NETWORK",
+      "title": "不審なネットワーク設定",
+      "description": "不審なファイアウォール/ネットワーク設定を検出",
+      "severity": "medium",
+      "location": {
+        "file_path": "/Users/iwakimiyamoto/projects/firmware_analysis/sample_firmware_data/firmware1/www/webpages/pages/frame/advanced_v2_ru.1733481622767.html",
+        "line_number": 326,
+        "context": "\t\"nat-forwarding\":{"
+      },
+      "pattern_matched": "nat[_-]?forward",
+      "raw_content": "\t\"nat-forwarding\":{",
+      "metadata": {},
+      "timestamp": "2026-01-08T10:25:05.903788"
+    }
+  ],
+  "verification_results": [
+    {
+      "finding_id": "1a8a5f67",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.356429"
+    },
+    {
+      "finding_id": "18b85717",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.356563"
+    },
+    {
+      "finding_id": "6f3bdecf",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.356638"
+    },
+    {
+      "finding_id": "556afb61",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.356708"
+    },
+    {
+      "finding_id": "0fba7bd3",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.356774"
+    },
+    {
+      "finding_id": "3f272346",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.356833"
+    },
+    {
+      "finding_id": "8bab620c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.356890"
+    },
+    {
+      "finding_id": "fa61d50d",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.356950"
+    },
+    {
+      "finding_id": "f3546218",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357008"
+    },
+    {
+      "finding_id": "bc1cde58",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357066"
+    },
+    {
+      "finding_id": "dda6a8c7",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357125"
+    },
+    {
+      "finding_id": "83d16110",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357184"
+    },
+    {
+      "finding_id": "c9bc5251",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357254"
+    },
+    {
+      "finding_id": "d0a8b21a",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357317"
+    },
+    {
+      "finding_id": "077d0f2f",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357377"
+    },
+    {
+      "finding_id": "9490c6f1",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357435"
+    },
+    {
+      "finding_id": "7a5dd43c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357493"
+    },
+    {
+      "finding_id": "1def310b",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357549"
+    },
+    {
+      "finding_id": "dd10bec1",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357609"
+    },
+    {
+      "finding_id": "ec740643",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357668"
+    },
+    {
+      "finding_id": "fab247f4",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357728"
+    },
+    {
+      "finding_id": "5a6e75e5",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357827"
+    },
+    {
+      "finding_id": "7fcc9685",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357916"
+    },
+    {
+      "finding_id": "a37f7aa9",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.357988"
+    },
+    {
+      "finding_id": "d3f5788d",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358052"
+    },
+    {
+      "finding_id": "3757dc30",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358111"
+    },
+    {
+      "finding_id": "cdcc82b0",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358352"
+    },
+    {
+      "finding_id": "e83d8dbc",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358417"
+    },
+    {
+      "finding_id": "f9316f5b",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358477"
+    },
+    {
+      "finding_id": "58ac1349",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358536"
+    },
+    {
+      "finding_id": "6a093f4d",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358628"
+    },
+    {
+      "finding_id": "c59befc6",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358754"
+    },
+    {
+      "finding_id": "4af5cbab",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358829"
+    },
+    {
+      "finding_id": "ca15102b",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358896"
+    },
+    {
+      "finding_id": "04c8e58c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.358989"
+    },
+    {
+      "finding_id": "5f3b2662",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359070"
+    },
+    {
+      "finding_id": "642e9d76",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359145"
+    },
+    {
+      "finding_id": "a1a882f0",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359221"
+    },
+    {
+      "finding_id": "ded781c8",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359283"
+    },
+    {
+      "finding_id": "2a00cacc",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 評価が必要 - バイナリの実際の動作を確認する必要があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359339"
+    },
+    {
+      "finding_id": "911be76e",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - データ抽出機能は情報漏洩に使用される可能性があります\n重要度: 優先的な対応が推奨されます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359396"
+    },
+    {
+      "finding_id": "d467facf",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359455"
+    },
+    {
+      "finding_id": "16b2d4dc",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359517"
+    },
+    {
+      "finding_id": "075f142c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359578"
+    },
+    {
+      "finding_id": "d6470564",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359640"
+    },
+    {
+      "finding_id": "175f8b63",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359698"
+    },
+    {
+      "finding_id": "6070a4a7",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359759"
+    },
+    {
+      "finding_id": "70d44443",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359817"
+    },
+    {
+      "finding_id": "2a0feab4",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359875"
+    },
+    {
+      "finding_id": "650f0b06",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359931"
+    },
+    {
+      "finding_id": "f30630d6",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.359987"
+    },
+    {
+      "finding_id": "63939b50",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360044"
+    },
+    {
+      "finding_id": "ddb2754a",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360105"
+    },
+    {
+      "finding_id": "aceaff9c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360190"
+    },
+    {
+      "finding_id": "96c74ae3",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 痕跡隠蔽機能は攻撃の検出を困難にします",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360287"
+    },
+    {
+      "finding_id": "f813aa93",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360363"
+    },
+    {
+      "finding_id": "830aab12",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - ハードコードされた認証情報は不正アクセスに使用される可能性があります",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "デフォルトパスワードを変更してください",
+        "認証情報のローテーションポリシーを確立してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360427"
+    },
+    {
+      "finding_id": "2e6c5d03",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360487"
+    },
+    {
+      "finding_id": "fe50b7cd",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360553"
+    },
+    {
+      "finding_id": "651bb868",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360612"
+    },
+    {
+      "finding_id": "05a607b4",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360669"
+    },
+    {
+      "finding_id": "1d28bc1b",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360727"
+    },
+    {
+      "finding_id": "e9f0dddd",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360786"
+    },
+    {
+      "finding_id": "fa652e94",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360841"
+    },
+    {
+      "finding_id": "e9cdd7e4",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360898"
+    },
+    {
+      "finding_id": "245955ec",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.360957"
+    },
+    {
+      "finding_id": "8046815c",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.361015"
+    },
+    {
+      "finding_id": "50e3a3af",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 高い - 隠しサービスは管理者の知らないアクセス経路を提供します",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください",
+        "不要なサービスを無効化してください",
+        "ファイアウォールで不要なポートをブロックしてください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.361071"
+    },
+    {
+      "finding_id": "a6ac746a",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 不審なネットワーク設定はセキュリティを弱体化させます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.361130"
+    },
+    {
+      "finding_id": "2db4cbbf",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 不審なネットワーク設定はセキュリティを弱体化させます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.361185"
+    },
+    {
+      "finding_id": "04d7a173",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 不審なネットワーク設定はセキュリティを弱体化させます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.361243"
+    },
+    {
+      "finding_id": "8c49171b",
+      "status": "verified_suspicious",
+      "verified_by": [
+        "static_analyzer",
+        "external_verifier"
+      ],
+      "evidence": [],
+      "notes": [
+        "静的検証エラー: 'StaticAnalyzerAgent' object has no attribute '_analyze_file_context'",
+        "外部検証: エミュレーション環境が必要なためスキップ"
+      ],
+      "risk_assessment": "カテゴリリスク: 中程度 - 不審なネットワーク設定はセキュリティを弱体化させます",
+      "recommendations": [
+        "詳細な調査を実施してください",
+        "製造元に問い合わせて意図的な機能かを確認してください",
+        "ネットワークセグメンテーションで影響を限定してください"
+      ],
+      "timestamp": "2026-01-08T10:25:06.361299"
+    }
+  ]
+}
