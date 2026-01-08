@@ -1,0 +1,12 @@
+# Core dependencies
+anthropic>=0.18.0
+
+# Optional: for enhanced features
+# hashcat - install via system package manager
+# nmap - install via system package manager
+# sshpass - install via system package manager
+# expect - install via system package manager
+
+# Development dependencies (optional)
+# pytest>=7.0.0
+# pytest-asyncio>=0.21.0

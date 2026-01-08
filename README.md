@@ -57,17 +57,34 @@ IoT機器のファームウェアに潜む不正機能を検出・検証する�
 | `SUSPICIOUS_NETWORK` | 不審なネットワーク設定 | MEDIUM |
 | `SUSPICIOUS_BINARY` | 不審なバイナリ | HIGH |
 
+## 2つの解析モード
+
+本システムは2つの解析モードを提供します：
+
+| モード | スクリプト | LLM | 特徴 |
+|--------|-----------|-----|------|
+| **パターンベース** | `analyze_firmware.py` | 不使用 | 高速、オフライン動作、正規表現ベース |
+| **LLM統合版** | `analyze_firmware_llm.py` | Claude API | 高精度、コンテキスト理解、インテリジェント解析 |
+
 ## インストール
 
 ```bash
 git clone git@github.com:miyamoto-iwaki/agentic-firmware-analysis.git
 cd agentic-firmware-analysis
+
+# 依存パッケージのインストール（LLM版を使用する場合）
+pip install -r requirements.txt
 ```
 
 ### 必要要件
 
 - Python 3.8以上
 - grep (システム標準)
+
+### LLM統合版の追加要件
+
+- Anthropic APIキー（`ANTHROPIC_API_KEY`環境変数）
+- anthropic パッケージ (`pip install anthropic`)
 
 ### オプション要件（動的解析用）
 
@@ -79,7 +96,7 @@ cd agentic-firmware-analysis
 
 ## 使用方法
 
-### 基本的な使用
+### パターンベース解析（LLM不使用）
 
 ```bash
 # 単一ファームウェアの解析
@@ -87,6 +104,22 @@ python analyze_firmware.py /path/to/firmware
 
 # 複数ファームウェアの解析
 python analyze_firmware.py /path/to/firmware1 /path/to/firmware2
+```
+
+### LLM統合版解析（推奨）
+
+```bash
+# APIキーを設定
+export ANTHROPIC_API_KEY=your_api_key
+
+# LLM統合版で解析
+python analyze_firmware_llm.py /path/to/firmware
+
+# エミュレーションターゲットを指定（FirmAE使用時）
+python analyze_firmware_llm.py /path/to/firmware --target 192.168.1.100
+
+# 使用モデルを指定
+python analyze_firmware_llm.py /path/to/firmware --model claude-sonnet-4-20250514
 ```
 
 ### オプション
@@ -135,26 +168,32 @@ asyncio.run(analyze())
 
 ```
 firmware_analysis/
-├── analyze_firmware.py          # メインスクリプト
-├── README.md                    # このファイル
+├── analyze_firmware.py          # パターンベース版メインスクリプト
+├── analyze_firmware_llm.py      # LLM統合版メインスクリプト
+├── requirements.txt             # Python依存パッケージ
+├── README.md
 ├── .gitignore
 ├── src/
 │   ├── __init__.py
-│   ├── agents/
-│   │   ├── __init__.py
+│   ├── agents/                  # パターンベース版エージェント
 │   │   ├── static_analyzer.py   # Agent A: 静的解析
 │   │   ├── internal_verifier.py # Agent B: 内部検証
 │   │   ├── external_verifier.py # Agent C: 外部検証
 │   │   └── orchestrator.py      # オーケストレーター
+│   ├── agents_llm/              # LLM統合版エージェント
+│   │   ├── static_analyzer_llm.py   # Agent A: LLM静的解析
+│   │   ├── internal_verifier_llm.py # Agent B: LLM内部検証
+│   │   ├── external_verifier_llm.py # Agent C: LLM外部検証
+│   │   └── orchestrator_llm.py      # LLMオーケストレーター
+│   ├── llm/                     # LLMクライアント
+│   │   ├── llm_client.py        # Claude APIクライアント
+│   │   └── base_llm_agent.py    # LLMエージェント基底クラス
 │   ├── core/
-│   │   ├── __init__.py
 │   │   ├── models.py            # データモデル定義
 │   │   └── base_agent.py        # エージェント基底クラス
 │   ├── config/
-│   │   ├── __init__.py
 │   │   └── settings.py          # 検出パターン・設定
 │   └── utils/
-│       ├── __init__.py
 │       └── report_generator.py  # レポート生成
 └── reports/                     # 生成レポート出力先
 ```
@@ -228,12 +267,72 @@ class SuspiciousPatterns:
     ])
 ```
 
+## LLM統合版の詳細
+
+### アーキテクチャ
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    OrchestratorLLM                               │
+│              (Claude APIによる協調制御)                          │
+└─────────────────────────────────────────────────────────────────┘
+          │                    │                    │
+          ▼                    ▼                    ▼
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│ StaticAnalyzer  │  │ InternalVerifier│  │ ExternalVerifier│
+│      LLM        │  │      LLM        │  │      LLM        │
+│                 │  │                 │  │                 │
+│ Claude API +    │  │ Claude API +    │  │ Claude API +    │
+│ Tool Use機能    │  │ Docker/FirmAE   │  │ nmap/hashcat    │
+│ ・read_file     │  │ ・exec_command  │  │ ・run_nmap_scan │
+│ ・search_pattern│  │ ・get_process   │  │ ・try_ssh_login │
+│ ・analyze_passwd│  │ ・run_binary    │  │ ・crack_password│
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+```
+
+### LLMエージェントの特徴
+
+| 特徴 | 説明 |
+|------|------|
+| **Tool Use** | Claude APIのTool Use機能を使用し、ファイル操作やコマンド実行を自律的に実行 |
+| **コンテキスト理解** | ファイル内容を理解し、誤検知を削減 |
+| **エージェント間対話** | 3つのエージェントが情報を共有し、協調して検証 |
+| **自然言語レポート** | 検出結果を人間が理解しやすい形で説明 |
+
+### 環境変数
+
+```bash
+# 必須
+export ANTHROPIC_API_KEY=your_api_key
+
+# オプション
+export ANTHROPIC_MODEL=claude-sonnet-4-20250514  # 使用モデル
+```
+
+## FirmAEによる動的解析
+
+完全な動的解析を行うには、FirmAEによるエミュレーション環境が必要です：
+
+```bash
+# FirmAEのインストール
+git clone https://github.com/pr0v3rbs/FirmAE.git
+cd FirmAE
+./install.sh
+
+# エミュレーション起動
+sudo ./run.sh -r /path/to/firmware.bin
+
+# エミュレーションのIPアドレスを確認し、解析を実行
+python analyze_firmware_llm.py /path/to/extracted_firmware --target 192.168.0.100
+```
+
 ## 注意事項
 
 - 本システムは自動解析ツールであり、誤検知の可能性があります
 - 検出された項目は人間による確認を推奨します
 - 動的解析（Agent B, C）には適切な環境設定が必要です
 - 認証試行やパスワードクラッキングは、許可された環境でのみ実行してください
+- LLM統合版はAPIコストが発生します（使用量に応じた課金）
 
 ## ライセンス
 
